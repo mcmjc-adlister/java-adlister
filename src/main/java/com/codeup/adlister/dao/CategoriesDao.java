@@ -30,7 +30,7 @@ public class CategoriesDao implements Categories{
 
         PreparedStatement stmt = null;
         try {
-            stmt = connection.prepareStatement("SELECT category_name FROM categories");
+            stmt = connection.prepareStatement("SELECT * FROM categories");
             ResultSet rs = stmt.executeQuery();
             return createCategoriesFromResults(rs);
         } catch (SQLException e) {
@@ -43,7 +43,10 @@ public class CategoriesDao implements Categories{
     private List<Category> createCategoriesFromResults(ResultSet rs) throws SQLException {
         List<Category> categories = new ArrayList<>();
         while (rs.next()) {
-            categories.add(new Category(rs.getString("category_name")));
+            categories.add(new Category(
+                    rs.getLong("id"),
+                    rs.getString("category_name"))
+            );
         }
         return categories;
     }

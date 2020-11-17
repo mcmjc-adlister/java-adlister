@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -17,6 +18,14 @@
                 <label for="description">Description</label>
                 <textarea id="description" name="description" class="form-control" type="text"></textarea>
             </div>
+
+            <c:forEach items="${categories}" var="category">
+
+                <input type="checkbox" id="${category.getCategory()}${category.getId()}" name="categories">
+                <label for="${category.getCategory()}${category.getId()}">${category.getCategory()}</label><br>
+
+            </c:forEach>
+
             <input type="submit" class="btn btn-block btn-primary">
         </form>
     </div>
