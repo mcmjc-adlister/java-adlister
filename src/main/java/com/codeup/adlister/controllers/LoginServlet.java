@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 @WebServlet(name = "controllers.LoginServlet", urlPatterns = "/login")
@@ -19,6 +20,13 @@ public class LoginServlet extends HttpServlet {
             return;
         }
         request.getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
+
+        HttpSession session = request.getSession();
+        String errorMessage = (String) session.getAttribute("passwordError");
+        if(errorMessage != null) {
+            request.setAttribute("error", errorMessage);
+            session.removeAttribute("error");//removes error message after session
+        }
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -37,6 +45,7 @@ public class LoginServlet extends HttpServlet {
             request.getSession().setAttribute("user", user);
             response.sendRedirect("/profile");
         } else {
+            request.getSession().setAttribute("error", "Invalid password");
             response.sendRedirect("/login");
         }
     }
