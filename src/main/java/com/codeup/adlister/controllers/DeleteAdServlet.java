@@ -33,7 +33,7 @@ public class DeleteAdServlet extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        //TODO may need to move code into doPost instead
     }
 
 }

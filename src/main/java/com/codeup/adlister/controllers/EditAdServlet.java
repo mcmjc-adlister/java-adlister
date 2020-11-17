@@ -31,25 +31,11 @@ public class EditAdServlet extends HttpServlet {
         }
 
         ads.updateAd(new Ad(ad.getId(), ad.getUserId(), title, description));
+        response.sendRedirect("/ads/show?id=" + ad.getId());
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        HttpSession session = request.getSession();
-
-        Long id = Long.parseLong(request.getParameter("id"));
-        String title = request.getParameter("title");
-        String description = request.getParameter("description");
-        Ads ads = DaoFactory.getAdsDao();
-        Ad ad = ads.getAdByID(id);
-        User user = (User) session.getAttribute("user");
-
-        if (ad == null || user == null || ad.getUserId() != user.getId()) {
-            // TODO send user to a page indicating there's an error
-            return;
-        }
-
-        ads.updateAd(new Ad(ad.getUserId(), title, description));
+        // TODO may need to make servlet code work in post instead of get
     }
-
 
 }
