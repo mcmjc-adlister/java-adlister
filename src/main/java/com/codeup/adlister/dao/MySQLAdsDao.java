@@ -41,6 +41,8 @@ public class MySQLAdsDao implements Ads {
 
     @Override
     public Long insert(Ad ad) {
+
+        //TODO insert categories into join table as well
         try {
             String insertQuery = "INSERT INTO ads(user_id, title, description, time_stamp) VALUES (?, ?, ?, ?)";
             PreparedStatement stmt = connection.prepareStatement(insertQuery, Statement.RETURN_GENERATED_KEYS);
@@ -101,6 +103,7 @@ public class MySQLAdsDao implements Ads {
           
     public boolean updateAd(Ad ad) {
 
+        //TODO update categories in join table
         PreparedStatement stmt = null;
         try {
             stmt = connection.prepareStatement("UPDATE ads " +

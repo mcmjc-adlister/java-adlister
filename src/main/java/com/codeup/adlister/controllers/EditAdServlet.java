@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.Arrays;
 
 @WebServlet(name = "EditAdServlet", urlPatterns="/ads/edit")
 public class EditAdServlet extends HttpServlet {
@@ -30,12 +31,14 @@ public class EditAdServlet extends HttpServlet {
             return;
         }
 
+        //TODO add ability to send new category information to be placed in join table
         ads.updateAd(new Ad(ad.getId(), ad.getUserId(), title, description));
+
         response.sendRedirect("/ads/show?id=" + ad.getId());
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // TODO may need to make servlet code work in post instead of get
+        // TODO may need to make servlet code from doGet work in doPost instead
     }
 
 }
