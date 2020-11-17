@@ -57,6 +57,11 @@ public class MySQLAdsDao implements Ads {
     }
 
     @Override
+    public void deleteByID(Long id) {
+        System.out.println("delete");
+    }
+
+    @Override
     public Ad getAdByID(Long id) {
 
         PreparedStatement stmt = null;
