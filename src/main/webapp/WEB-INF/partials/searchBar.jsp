@@ -7,8 +7,8 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <li>
-    <a href="#">
+    <div class="py-auto">
     <label for="search">Search</label>
     <input id="search" name="search" type="text">
-    </a>
+    </div>
 </li>
