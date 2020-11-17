@@ -40,7 +40,7 @@ public class RegisterServlet extends HttpServlet {
             response.sendRedirect("/login");
         } catch (RuntimeException e) {
             e.printStackTrace();
-            request.setAttribute("error", "That username is already taken! Please pick another one.");
+            request.setAttribute("error", "Username not available!");
             request.getRequestDispatcher("/WEB-INF/register.jsp").forward(request, response);
         }
     }
