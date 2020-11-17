@@ -22,7 +22,6 @@ public class DeleteAdServlet extends HttpServlet {
         User user = (User) session.getAttribute("user");
 
         if (ad == null || user == null || ad.getUserId() != user.getId()) {
-            System.out.println("Can't delete");
             return;
         }
 
@@ -37,8 +36,7 @@ public class DeleteAdServlet extends HttpServlet {
         Ad ad = DaoFactory.getAdsDao().getAdByID(id);
         User user = (User) session.getAttribute("user");
 
-        if (ad == null || user == null || ad.getUserId() != id) {
-            System.out.println("Can't delete");
+        if (ad == null || user == null || ad.getUserId() != user.getId()) {
             return;
         }
 

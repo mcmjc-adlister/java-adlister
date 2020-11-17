@@ -57,8 +57,15 @@ public class MySQLAdsDao implements Ads {
     }
 
     @Override
-    public void deleteByID(Long id) {
-        System.out.println("delete");
+    public boolean deleteByID(Long id) {
+        PreparedStatement stmt = null;
+        try {
+            stmt = connection.prepareStatement("DELETE FROM ads WHERE id = ?");
+            stmt.setLong(1, id);
+            return stmt.execute();
+        } catch (SQLException e) {
+            throw new RuntimeException("Error deleting ad by ID.", e);
+        }
     }
 
     @Override

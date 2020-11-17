@@ -33,8 +33,8 @@ public class ListAdsDao implements Ads {
     }
 
     @Override
-    public void deleteByID(Long id) {
-
+    public boolean deleteByID(Long id) {
+        return false;
     }
 
     private List<Ad> generateAds() {
