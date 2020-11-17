@@ -10,7 +10,7 @@
 
     <div class="container">
         <h1>Welcome, ${sessionScope.user.username}!</h1>
+        <button><a href="${pageContext.request.contextPath}/update">Edit Profile</a></button>
     </div>
-
 </body>
 </html>

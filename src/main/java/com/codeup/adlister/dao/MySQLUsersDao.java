@@ -66,6 +66,7 @@ public class MySQLUsersDao implements Users {
 
     }
 
+//    update user information
     @Override
     public boolean updateUser(User user) throws SQLException {
         boolean updated;
@@ -78,14 +79,13 @@ public class MySQLUsersDao implements Users {
             stmnt.setLong(4, user.getId());
             stmnt.executeUpdate();
             updated = true;
-//            updated = statement.executeUpdate() > 0;
         } catch (SQLException e) {
             throw new RuntimeException("error", e);
         }
         return true;
     }
 
-
+//delete user
     @Override
     public boolean deleteUser(int id) throws SQLException {
         boolean rowDeleted;

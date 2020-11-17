@@ -30,6 +30,7 @@
         </div>
         <div class="form-group text-white">
             <label for="password">Password</label>
+            <jsp:include page="partials/error.jsp"/>
             <input id="password" value="<c:out value='${password}' />" name="password" class="form-control" type="password">
         </div>
         <div class="form-group text-white">
