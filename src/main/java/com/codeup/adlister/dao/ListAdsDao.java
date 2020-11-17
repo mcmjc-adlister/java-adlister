@@ -27,6 +27,11 @@ public class ListAdsDao implements Ads {
         return ad.getId();
     }
 
+    @Override
+    public Ad getAdByID(Long id) {
+        return null;
+    }
+
     private List<Ad> generateAds() {
         List<Ad> ads = new ArrayList<>();
         ads.add(new Ad(
@@ -55,4 +60,5 @@ public class ListAdsDao implements Ads {
         ));
         return ads;
     }
+
 }
