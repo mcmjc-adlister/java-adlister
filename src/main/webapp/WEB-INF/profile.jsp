@@ -11,6 +11,8 @@
 
     <div class="container">
         <h1>Welcome, ${sessionScope.user.username}!</h1>
+
+        <button><a href="${pageContext.request.contextPath}/update">Edit Profile</a></button>
         <c:choose>
             <c:when test="${usersAds.isEmpty()}">
                 <h2>No ads posted.</h2>
@@ -29,6 +31,5 @@
             </c:otherwise>
         </c:choose>
     </div>
-
 </body>
 </html>

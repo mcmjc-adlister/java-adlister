@@ -51,6 +51,7 @@ public class RegisterServlet extends HttpServlet {
                 request.getRequestDispatcher("/WEB-INF/register.jsp").forward(request, response);
             }
         }
+
             // create and save a new user
             User user = new User(username, email, password);
             try {

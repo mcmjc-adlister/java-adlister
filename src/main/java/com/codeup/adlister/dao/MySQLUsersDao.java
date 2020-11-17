@@ -6,15 +6,16 @@ import com.mysql.cj.jdbc.Driver;
 import java.sql.*;
 
 public class MySQLUsersDao implements Users {
+    private static final String DELETE_USERS_SQL = "DELETE FROM users WHERE id = ?";
     private Connection connection;
 
     public MySQLUsersDao(Config config) {
         try {
             DriverManager.registerDriver(new Driver());
             connection = DriverManager.getConnection(
-                config.getUrl(),
-                config.getUser(),
-                config.getPassword()
+                    config.getUrl(),
+                    config.getUser(),
+                    config.getPassword()
             );
         } catch (SQLException e) {
             throw new RuntimeException("Error connecting to the database!", e);
@@ -65,16 +66,47 @@ public class MySQLUsersDao implements Users {
 
     }
 
+//    update user information
+    @Override
+    public boolean updateUser(User user) throws SQLException {
+        boolean updated;
+        String updateInfo = "update users set username = ?, email = ?, password = ? where id = ?";
+        try {
+            PreparedStatement stmnt = connection.prepareStatement(updateInfo);
+            stmnt.setString(1, user.getUsername());
+            stmnt.setString(2, user.getEmail());
+            stmnt.setString(3, user.getPassword());
+            stmnt.setLong(4, user.getId());
+            stmnt.executeUpdate();
+            updated = true;
+        } catch (SQLException e) {
+            throw new RuntimeException("error", e);
+        }
+        return true;
+    }
+
+//delete user
+    @Override
+    public boolean deleteUser(int id) throws SQLException {
+        boolean rowDeleted;
+        try (
+                PreparedStatement statement = connection.prepareStatement(DELETE_USERS_SQL);) {
+            statement.setInt(1, id);
+            rowDeleted = statement.executeUpdate() > 0;
+        }
+        return rowDeleted;
+    }
+
     private User extractUser(ResultSet rs) throws SQLException {
-        if (! rs.next()) {
+        if (!rs.next()) {
             return null;
         }
         return new User(
-            rs.getLong("id"),
-            rs.getString("username"),
-            rs.getString("email"),
-            rs.getString("password")
+                rs.getLong("id"),
+                rs.getString("username"),
+                rs.getString("email"),
+                rs.getString("password")
         );
     }
-
 }
+
