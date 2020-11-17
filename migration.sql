@@ -1,20 +1,21 @@
 CREATE DATABASE IF NOT EXISTS adlister_db;
 USE adlister_db;
 
-# DROP TABLE IF EXISTS ads;
-# DROP TABLE IF EXISTS users;
-# DROP TABLE IF EXISTS categories;
-# DROP TABLE IF EXISTS ad_categories_join_table;
+DROP TABLE IF EXISTS ad_categories_join_table;
+DROP TABLE IF EXISTS categories;
+DROP TABLE IF EXISTS ads;
+DROP TABLE IF EXISTS users;
 
-CREATE TABLE IF NOT EXISTS users (
+
+CREATE TABLE users (
     id INT UNSIGNED NOT NULL AUTO_INCREMENT,
-    username VARCHAR(240) NOT NULL,
+    username VARCHAR(240) NOT NULL UNIQUE,
     email VARCHAR(240) NOT NULL,
     password VARCHAR(255) NOT NULL,
     PRIMARY KEY (id)
 );
 
-CREATE TABLE IF NOT EXISTS ads (
+CREATE TABLE ads (
     id INT UNSIGNED NOT NULL AUTO_INCREMENT,
     user_id INT UNSIGNED NOT NULL,
     title VARCHAR(240) NOT NULL,
@@ -25,15 +26,16 @@ CREATE TABLE IF NOT EXISTS ads (
         ON DELETE CASCADE
 );
 
-CREATE TABLE IF NOT EXISTS categories (
+CREATE TABLE categories (
     id INT UNSIGNED NOT NULL AUTO_INCREMENT,
     category_name VARCHAR(45),
     PRIMARY KEY (id)
 );
 
-CREATE TABLE IF NOT EXISTS ad_categories_join_table (
+CREATE TABLE ad_categories_join_table (
     categories_id INT UNSIGNED NOT NULL,
     ads_id INT UNSIGNED NOT NULL,
     FOREIGN KEY (categories_id) REFERENCES categories(id),
     FOREIGN KEY (ads_id) REFERENCES ads(id)
+
 );
