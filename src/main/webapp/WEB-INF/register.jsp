@@ -29,5 +29,6 @@
             <input type="submit" class="btn btn-primary btn-block">
         </form>
     </div>
+    <jsp:include page="partials/JQuery.jsp" />
 </body>
 </html>

@@ -7,6 +7,8 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <li>
+    <a href="#">
     <label for="search">Search</label>
     <input id="search" name="search" type="text">
+    </a>
 </li>
