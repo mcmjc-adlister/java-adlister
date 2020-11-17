@@ -11,4 +11,5 @@ public interface Ads {
     Long insert(Ad ad);
     Ad getAdByID(Long id);
     boolean deleteByID(Long id);
+    boolean updateAd(Ad ad);
 }
