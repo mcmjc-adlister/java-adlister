@@ -56,12 +56,12 @@ public class MySQLAdsDao implements Ads {
     }
 
     @Override
-    public Ad getAdByID(String id) {
+    public Ad getAdByID(Long id) {
 
         PreparedStatement stmt = null;
         try {
             stmt = connection.prepareStatement("SELECT * FROM ads WHERE id = ?");
-            stmt.setLong(1, Long.parseLong(id));
+            stmt.setLong(1, id);
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
                 return extractAd(rs);
@@ -77,7 +77,8 @@ public class MySQLAdsDao implements Ads {
             rs.getLong("id"),
             rs.getLong("user_id"),
             rs.getString("title"),
-            rs.getString("description")
+            rs.getString("description"),
+            rs.getTimestamp("time_stamp")
         );
     }
 
