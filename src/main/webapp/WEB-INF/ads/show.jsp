@@ -13,7 +13,11 @@
 <c:out value="Description = ${ad.getDescription()}" />
 <c:out value="Timestamp = ${ad.getTimestamp().toString()}" />
 
-<%-- TODO display categories --%>
+<c:forEach items="${categories}" var="category">
+    ${category}
+</c:forEach>
+
+<%-- TODO if user is logged in and owner of ad, show edit and delete buttons --%>
 
 </body>
 </html>

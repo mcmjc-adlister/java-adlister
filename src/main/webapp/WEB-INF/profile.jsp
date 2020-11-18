@@ -24,6 +24,8 @@
                         <div class="col-auto mb-5">
                             <div class="card h-100" style="width: 30rem;">
                                 <div class="card-body">
+                                <%-- TODO makes ads clickable to go to its own page -> show.jsp  --%>
+                                <%-- TODO show edit and delete buttons for owned ads --%>
                                     <h4 class="card-title text-center">${ad.title}</h4>
                                     <p class="card-title">${ad.description}</p>
                                     <p class="text-right" style="font-size: small;">Posted on: ${ad.timestamp}</p>
