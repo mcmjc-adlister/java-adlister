@@ -20,7 +20,17 @@
                             ${requestScope.usernameError}
                     </div>
                 </c:if>
-                <input id="username" name="username" class="form-control" type="text">
+                <%--Sticky forms check for Username--%>
+                <c:choose>
+                    <%--If an enteredUsername value is passed in, fill it as the value for this input--%>
+                    <c:when test="${!(enteredUsername.equals(null))}">
+                        <input id="username" name="username" class="form-control" type="text" value="${enteredUsername}">
+                    </c:when>
+                    <%--Otherwise, as normal--%>
+                    <c:otherwise>
+                        <input id="username" name="username" class="form-control" type="text">
+                    </c:otherwise>
+                </c:choose>
             </div>
             <div class="form-group">
                 <label for="email">Email</label>
@@ -29,7 +39,17 @@
                             ${requestScope.emailError}
                     </div>
                 </c:if>
-                <input id="email" name="email" class="form-control" type="text">
+                <%--Sticky forms check for email--%>
+                <c:choose>
+                    <%--If an enteredEmail value is passed in, fill it as the value for this input--%>
+                    <c:when test="${!(enteredEmail.equals(null))}">
+                        <input id="email" name="email" class="form-control" type="text" value="${enteredEmail}">
+                    </c:when>
+                    <%--Otherwise, as normal--%>
+                    <c:otherwise>
+                        <input id="email" name="email" class="form-control" type="text">
+                    </c:otherwise>
+                </c:choose>
             </div>
             <div class="form-group">
                 <label for="password">Password</label>

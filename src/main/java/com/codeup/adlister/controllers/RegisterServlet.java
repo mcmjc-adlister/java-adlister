@@ -37,6 +37,8 @@ public class RegisterServlet extends HttpServlet {
                 || (!password.equals(passwordConfirmation));
 
         if (inputHasErrors) {
+            request.getSession().setAttribute("enteredUsername", username);
+            request.getSession().setAttribute("enteredEmail", email);
             if (username.isEmpty()) {
                 request.setAttribute("error", "Enter a username!");
                 request.getRequestDispatcher("/WEB-INF/register.jsp").forward(request, response);
