@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.Timestamp;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -34,6 +35,8 @@ public class CreateAdServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         User user = (User) request.getSession().getAttribute("user");
 
+        System.out.println(" = " + Arrays.toString(request.getParameterValues("categories")));
+
         //TODO also insert category data into join table
         Ad ad = new Ad(
             user.getId(),
@@ -41,7 +44,9 @@ public class CreateAdServlet extends HttpServlet {
             request.getParameter("description"),
             new Timestamp(new Date().getTime())
         );
-        DaoFactory.getAdsDao().insert(ad);
+        ad.setId(DaoFactory.getAdsDao().insert(ad));
+        DaoFactory.getCategoriesDao().setCategories(ad, request.getParameterValues("categories"));
+
         response.sendRedirect("/ads");
     }
 }
