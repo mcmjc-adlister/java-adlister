@@ -17,7 +17,7 @@
         <ul class="card-subtitle d-flex m-0 p-0 pt-1" style="list-style: none; font-size: 12px">
             <li class="pr-2">Categories:</li>
             <c:forEach items="${categories}" var="category">
-                <li class="pr-2">${category}</li>
+                <li class="pr-2"><a href="/view?category=${category}">${category}</a></li>
             </c:forEach>
         </ul>
         <p class="card-text"><c:out value="${ad.getDescription()}"/></p>
