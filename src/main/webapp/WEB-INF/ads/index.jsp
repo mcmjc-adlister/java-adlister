@@ -13,7 +13,7 @@
     <h1>Here Are all the ads!</h1>
 
     <c:forEach var="ad" items="${ads}">
-        <div class="col-md-6">
+        <div class="col-md-6 adsContainer">
             <h2>${ad.title}</h2>
             <p>${ad.description}</p>
         </div>
@@ -25,8 +25,8 @@
     <h1>Searched ads!</h1>
 
     <c:forEach var="ad" items="${ads}">
-        <div class="col-md-6">
-            <h2>${ad.title}</h2>
+        <div class="col-md-6 searchContainer">
+            <h2 class="title">${ad.title}</h2>
             <p>${ad.description}</p>
         </div>
     </c:forEach>
