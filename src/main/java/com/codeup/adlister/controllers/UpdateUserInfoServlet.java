@@ -3,6 +3,7 @@ package com.codeup.adlister.controllers;
 import com.codeup.adlister.dao.DaoFactory;
 import com.codeup.adlister.dao.MySQLUsersDao;
 import com.codeup.adlister.models.User;
+import com.codeup.adlister.util.Email;
 import com.codeup.adlister.util.Password;
 
 
@@ -19,11 +20,11 @@ public class UpdateUserInfoServlet extends HttpServlet {
 
 
     @Override
+
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         //TODO page is directly accessible without being logged in; change
         req.getRequestDispatcher("/WEB-INF/editInfo.jsp").forward(req, resp);
-
     }
 
     @Override
@@ -33,10 +34,20 @@ public class UpdateUserInfoServlet extends HttpServlet {
         // keep logic the same? separate change password functionality?
         User current = (User) req.getSession().getAttribute("user");
         long userId = current.getId();
-        String username = req.getParameter("username");
-        String email = req.getParameter("email");
-        String password = Password.hash(req.getParameter("password"));
-        boolean passwordConfirmation = Password.check(req.getParameter("confirm_password"), password);
+        String username = request.getParameter("username");
+        String email = request.getParameter("email");
+        String password = Password.hash(request.getParameter("password"));
+        boolean passwordConfirmation = Password.check(request.getParameter("confirm_password"), password);
+        boolean passwordRequirements = (Password.isValidPassword(password));
+        boolean emailRequirements = (Email.emailMeetsRequirements(email));
+
+
+        if (!emailRequirements)
+            request.setAttribute("error", "Email does not meet requirements");
+        request.getRequestDispatcher("/WEB-INF/editInfo.jsp").forward(request, response);
+        if (!passwordRequirements)
+            request.setAttribute("error", "Password does not meet requirements");
+        request.getRequestDispatcher("/WEB-INF/editInfo.jsp").forward(request, response);
 
         if (passwordConfirmation) {
             User user = new User(userId, username, email, password);
@@ -46,7 +57,7 @@ public class UpdateUserInfoServlet extends HttpServlet {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-            resp.sendRedirect("/ads");
+            response.sendRedirect("/profile");
         }
     }
 }

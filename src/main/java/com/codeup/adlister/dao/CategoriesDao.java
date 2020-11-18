@@ -36,8 +36,6 @@ public class CategoriesDao implements Categories{
         } catch (SQLException e) {
             throw new RuntimeException("Error retrieving all categories.", e);
         }
-
-
     }
 
     public String getCategoryNameById(Long id) {
