@@ -20,6 +20,8 @@ public class UpdateUserInfoServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        //TODO page is directly accessible without being logged in; change
         req.getRequestDispatcher("/WEB-INF/editInfo.jsp").forward(req, resp);
 
     }

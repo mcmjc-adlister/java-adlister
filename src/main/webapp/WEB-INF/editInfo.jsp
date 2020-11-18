@@ -39,6 +39,8 @@
         </div>
         <button type="submit" class="btn btn-primary btn-block">Update</button>
     </form>
+
+<%-- TODO (suggestion/optional) make delete user an admin only option --%>
     <form action="/delete" method="post">
         <button type="submit" class="btn btn-danger">Delete User</button>
     </form>

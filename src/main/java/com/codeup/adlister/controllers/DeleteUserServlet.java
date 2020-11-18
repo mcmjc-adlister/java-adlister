@@ -17,6 +17,8 @@ public class DeleteUserServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        //TODO delete page is accessible without being logged in, needs to be changed
+
         request.getRequestDispatcher("WEB-INF/editInfo.jsp").forward(request, response);
     }
 

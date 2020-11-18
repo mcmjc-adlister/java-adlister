@@ -29,7 +29,9 @@ public class DeleteAdServlet extends HttpServlet {
             return;
         }
 
+        DaoFactory.getCategoriesDao().deleteEntries(id);
         DaoFactory.getAdsDao().deleteByID(id);
+
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
