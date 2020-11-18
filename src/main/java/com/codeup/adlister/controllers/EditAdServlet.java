@@ -22,6 +22,9 @@ public class EditAdServlet extends HttpServlet {
         Long id = Long.parseLong(request.getParameter("id"));
         String title = request.getParameter("title");
         String description = request.getParameter("description");
+
+
+
         Ads ads = DaoFactory.getAdsDao();
         Ad ad = ads.getAdByID(id);
         User user = (User) session.getAttribute("user");
@@ -32,7 +35,10 @@ public class EditAdServlet extends HttpServlet {
         }
 
         //TODO add ability to send new category information to be placed in join table
+        // code below will work given the edit form's name is 'categories'
+        //DaoFactory.getCategoriesDao().deleteEntries(id);
         ads.updateAd(new Ad(ad.getId(), ad.getUserId(), title, description));
+        //DaoFactory.getCategoriesDao().setCategories(ad, request.getParameterValues("categories");
 
         response.sendRedirect("/ads/show?id=" + ad.getId());
     }

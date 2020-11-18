@@ -10,4 +10,6 @@ public interface Categories {
     void setCategories(Ad ad, String[] categories);
     Category getCategoryByName(String s);
     void deleteEntries(Long id);
+    List<String> getCategoriesByAdId(Long id);
+    String getCategoryNameById(Long id);
 }

@@ -28,6 +28,9 @@ public class UpdateUserInfoServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+
+        //TODO the current logic forces the user to type in a password whether they want to change it or not
+        // keep logic the same? separate change password functionality?
         User current = (User) req.getSession().getAttribute("user");
         long userId = current.getId();
         String username = req.getParameter("username");

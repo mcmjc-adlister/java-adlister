@@ -16,6 +16,8 @@
         </div>
         <div class="container">
             <div class="row">
+
+                <%-- TODO reduce number of categories? limit user to picking only 3? --%>
                 <c:forEach items="${categories}" var="category">
                     <div class="col-2 checkbox-inline">
                         <label>
