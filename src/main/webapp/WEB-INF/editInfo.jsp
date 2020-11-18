@@ -19,6 +19,7 @@
 <div class="container">
     <h1 class="text-center text-white">${sessionScope.user.username}'s Information</h1>
     <hr>
+    <jsp:include page="partials/error.jsp"/>
     <form action="/update" method="post">
         <div class="form-group text-white">
             <label for="username">Username</label>
@@ -30,7 +31,6 @@
         </div>
         <div class="form-group text-white">
             <label for="password">Password</label>
-            <jsp:include page="partials/error.jsp"/>
             <input id="password" value="<c:out value='${password}' />" name="password" class="form-control" type="password">
         </div>
         <div class="form-group text-white">
