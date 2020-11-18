@@ -20,14 +20,19 @@ public class UpdateUserInfoServlet extends HttpServlet {
 
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("/WEB-INF/editInfo.jsp").forward(request, response);
 
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        //TODO page is directly accessible without being logged in; change
+        req.getRequestDispatcher("/WEB-INF/editInfo.jsp").forward(req, resp);
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        User current = (User) request.getSession().getAttribute("user");
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+
+        //TODO the current logic forces the user to type in a password whether they want to change it or not
+        // keep logic the same? separate change password functionality?
+        User current = (User) req.getSession().getAttribute("user");
         long userId = current.getId();
         String username = request.getParameter("username");
         String email = request.getParameter("email");

@@ -15,13 +15,11 @@ import java.util.List;
 @WebServlet(name = "controllers.ViewProfileServlet", urlPatterns = "/profile")
 public class ViewProfileServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // TODO allow users to view any profile as a read-only (maybe make being logged in optional?)
         if (request.getSession().getAttribute("user") == null) {
             response.sendRedirect("/login");
             return;
         }
-//        User user = (User) request.getSession().getAttribute("user");
-//        System.out.println("user = " + user);
-//        System.out.println("user.getId() = " + user.getId());
         request.setAttribute("usersAds", DaoFactory.getAdsDao().getAdsByUser((User) request.getSession().getAttribute("user")));
         request.getRequestDispatcher("/WEB-INF/profile.jsp").forward(request, response);
     }

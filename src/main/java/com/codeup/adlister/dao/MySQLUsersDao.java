@@ -89,6 +89,8 @@ public class MySQLUsersDao implements Users {
     @Override
     public boolean deleteUser(int id) throws SQLException {
         boolean rowDeleted;
+        //TODO code is formatted awkwardly due to a (probably?) misplaced statement;
+        // from testing delete, it currently seems to not delete the user
         try (
                 PreparedStatement statement = connection.prepareStatement(DELETE_USERS_SQL);) {
             statement.setInt(1, id);
