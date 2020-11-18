@@ -1,5 +1,7 @@
 package com.codeup.adlister.models;
 
+import java.util.List;
+
 public class Category {
     private long id;
     private String category;
@@ -8,6 +10,10 @@ public class Category {
     public Category(long id, String category){
         this.id = id;
         this.category = category;
+    }
+
+    public Category(String category_name) {
+        this.category = category_name;
     }
 
     public long getId(){

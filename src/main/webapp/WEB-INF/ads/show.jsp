@@ -13,5 +13,7 @@
 <c:out value="Description = ${ad.getDescription()}" />
 <c:out value="Timestamp = ${ad.getTimestamp().toString()}" />
 
+<%-- TODO display categories --%>
+
 </body>
 </html>
