@@ -40,6 +40,26 @@ public class MySQLAdsDao implements Ads {
     }
 
     @Override
+    public List<Ad> searchAds(String keywords) {
+        try {
+            String sql = "SELECT * FROM ads WHERE ads.title LIKE ?";
+            String safeSearch = "%" + keywords + "%";
+
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            stmt.setString(1, safeSearch);
+
+            ResultSet rs = stmt.executeQuery();
+            List<Ad> ads = new ArrayList<>();
+            while (rs.next()) {
+                ads.add(extractAd(rs));
+            }
+            return ads;
+        } catch (SQLException e) {
+            throw new RuntimeException("Error searching for ads.", e);
+        }
+    }
+
+    @Override
     public Long insert(Ad ad) {
 
         //TODO insert categories into join table as well
