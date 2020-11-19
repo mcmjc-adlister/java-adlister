@@ -146,4 +146,23 @@ public class CategoriesDao implements Categories{
 
     }
 
+    public List<Long> getAdsByCategoryId(long id) {
+        PreparedStatement stmt = null;
+        List<Long> idList = new ArrayList<>();
+        try {
+            stmt = connection.prepareStatement("SELECT * FROM ad_categories_join_table WHERE categories_id = ?");
+            stmt.setLong(1, id);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                idList.add(rs.getLong("ads_id"));
+            }
+            return idList;
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Error retrieving categories by ad id:" + id, e);
+        }
+
+    }
+
 }

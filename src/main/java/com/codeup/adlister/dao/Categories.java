@@ -12,4 +12,5 @@ public interface Categories {
     void deleteEntries(Long id);
     List<String> getCategoriesByAdId(Long id);
     String getCategoryNameById(Long id);
+    public List<Long> getAdsByCategoryId(long id);
 }
