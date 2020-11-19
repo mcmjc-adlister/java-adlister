@@ -3,7 +3,7 @@
 <html>
 <head>
     <jsp:include page="/WEB-INF/partials/head.jsp">
-        <jsp:param name="title" value="Create a new Ad" />
+        <jsp:param name="title" value="Create a new Ad"/>
     </jsp:include>
 </head>
 <body>
@@ -41,5 +41,17 @@
             <input type="submit" class="btn btn-block btn-primary">
         </form>
     </div>
+<!--                 <%-- TODO reduce number of categories? limit user to picking only 3? --%>
+                <c:forEach items="${categories}" var="category">
+                    <div class="col-2 checkbox-inline">
+                        <label>
+                            <input type="checkbox"
+                                   id="${category.getCategory()}${category.getId()}" name="categories" value="${category.getCategory()}">
+                                <c:out value="${category.getCategory()}" />
+                        </label>
+                    </div>
+                </c:forEach>
+            </div>
+        </div> -->
 </body>
 </html>

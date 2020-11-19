@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: carolineesquivel
-  Date: 11/17/20
-  Time: 11:57 AM
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -17,8 +10,10 @@
 <body>
 <jsp:include page="/WEB-INF/partials/navbar.jsp"/>
 <div class="container">
+<%-- TODO white text on white background currently makes them unreadable --%>
     <h1 class="text-center text-white">${sessionScope.user.username}'s Information</h1>
     <hr>
+    <jsp:include page="partials/error.jsp"/>
     <form action="/update" method="post">
         <div class="form-group text-white">
             <label for="username">Username</label>
@@ -30,7 +25,6 @@
         </div>
         <div class="form-group text-white">
             <label for="password">Password</label>
-            <jsp:include page="partials/error.jsp"/>
             <input id="password" value="<c:out value='${password}' />" name="password" class="form-control" type="password">
         </div>
         <div class="form-group text-white">
@@ -39,6 +33,8 @@
         </div>
         <button type="submit" class="btn btn-primary btn-block">Update</button>
     </form>
+
+<%-- TODO (suggestion/optional) make delete user an admin only option --%>
     <form action="/delete" method="post">
         <button type="submit" class="btn btn-danger">Delete User</button>
     </form>

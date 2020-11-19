@@ -30,22 +30,139 @@ public class CategoriesDao implements Categories{
 
         PreparedStatement stmt = null;
         try {
-            stmt = connection.prepareStatement("SELECT category_name FROM categories");
+            stmt = connection.prepareStatement("SELECT * FROM categories");
             ResultSet rs = stmt.executeQuery();
             return createCategoriesFromResults(rs);
         } catch (SQLException e) {
             throw new RuntimeException("Error retrieving all categories.", e);
         }
+    }
 
+    public String getCategoryNameById(Long id) {
+
+        PreparedStatement stmt = null;
+        try {
+            stmt = connection.prepareStatement("SELECT category_name FROM categories WHERE id = ?");
+            stmt.setLong(1, id);
+            ResultSet rs = stmt.executeQuery();
+
+            if (!rs.next()) {
+                return null;
+            }
+            return rs.getString("category_name");
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Error retrieving category by its id:" + id, e);
+        }
+    }
+
+    @Override
+    public Category getCategoryByName(String s) {
+
+        PreparedStatement stmt = null;
+        try {
+            stmt = connection.prepareStatement("SELECT * FROM categories WHERE category_name = ?");
+            stmt.setString(1, s);
+            ResultSet rs = stmt.executeQuery();
+
+            if (!rs.next()) {
+                return null;    
+            }
+            return new Category(rs.getLong(1), rs.getString(2));
+            
+        } catch (SQLException e) {
+            throw new RuntimeException("Error retrieving category:" + s, e);
+        }
+
+    }
+
+    @Override
+    public void deleteEntries(Long id) {
+        PreparedStatement stmt = null;
+        try {
+            stmt = connection.prepareStatement("DELETE FROM ad_categories_join_table WHERE ads_id = ?");
+            stmt.setLong(1, id);
+            stmt.execute();
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Error deleting ad by ID.", e);
+        }
+    }
+
+    @Override
+    public void setCategories(Ad ad, String[] categories) {
+
+        System.out.println("ad.getId() = " + ad.getId());
+        
+        for (String category: categories) {
+            
+            Category cat = getCategoryByName(category);
+
+            try {
+                String insertQuery = "INSERT INTO ad_categories_join_table (categories_id, ads_id) VALUES (?, ?)";
+                PreparedStatement stmt = connection.prepareStatement(insertQuery);
+                stmt.setLong(1, cat.getId());
+                stmt.setLong(2, ad.getId());
+                stmt.executeUpdate();
+
+            } catch (SQLException e) {
+                throw new RuntimeException("Error creating a new ad.", e);
+            }
+
+            System.out.println("cat.getId() = " + cat.getId());
+            System.out.println("cat.getCategory() = " + cat.getCategory());
+        }
 
     }
 
     private List<Category> createCategoriesFromResults(ResultSet rs) throws SQLException {
         List<Category> categories = new ArrayList<>();
         while (rs.next()) {
-            categories.add(new Category(rs.getString("category_name")));
+            categories.add(new Category(
+                    rs.getLong("id"),
+                    rs.getString("category_name"))
+            );
         }
         return categories;
+    }
+
+    public List<String> getCategoriesByAdId(Long id) {
+
+        PreparedStatement stmt = null;
+        List<String> categories = new ArrayList<>();
+        try {
+            stmt = connection.prepareStatement("SELECT * FROM ad_categories_join_table WHERE ads_id = ?");
+            stmt.setLong(1, id);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                categories.add(getCategoryNameById(rs.getLong("categories_id")));
+            }
+            return categories;
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Error retrieving categories by ad id:" + id, e);
+        }
+
+    }
+
+    public List<Long> getAdsByCategoryId(long id) {
+        PreparedStatement stmt = null;
+        List<Long> idList = new ArrayList<>();
+        try {
+            stmt = connection.prepareStatement("SELECT * FROM ad_categories_join_table WHERE categories_id = ?");
+            stmt.setLong(1, id);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                idList.add(rs.getLong("ads_id"));
+            }
+            return idList;
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Error retrieving categories by ad id:" + id, e);
+        }
+
     }
 
 }

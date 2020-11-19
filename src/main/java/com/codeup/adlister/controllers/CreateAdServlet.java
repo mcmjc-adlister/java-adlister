@@ -2,6 +2,7 @@ package com.codeup.adlister.controllers;
 
 import com.codeup.adlister.dao.DaoFactory;
 import com.codeup.adlister.models.Ad;
+import com.codeup.adlister.models.Category;
 import com.codeup.adlister.models.User;
 
 import javax.servlet.ServletException;
@@ -12,7 +13,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.Timestamp;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 @WebServlet(name = "controllers.CreateAdServlet", urlPatterns = "/ads/create")
 public class CreateAdServlet extends HttpServlet {
@@ -21,7 +24,6 @@ public class CreateAdServlet extends HttpServlet {
             response.sendRedirect("/login");
             return;
         }
-        request.getRequestDispatcher("/WEB-INF/ads/create.jsp").forward(request, response);
 
         HttpSession session = request.getSession();
         String errorMessage = (String) session.getAttribute("error");
@@ -29,6 +31,14 @@ public class CreateAdServlet extends HttpServlet {
             request.setAttribute("error", errorMessage);
             session.removeAttribute("error");//removes error message after session
         }
+
+        List<Category> categories = DaoFactory.getCategoriesDao().all();
+
+        request.setAttribute("categories", categories);
+
+        request.getRequestDispatcher("/WEB-INF/ads/create.jsp")
+            .forward(request, response);
+
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
@@ -58,7 +68,8 @@ public class CreateAdServlet extends HttpServlet {
                     description,
                     new Timestamp(new Date().getTime())
             );
-            DaoFactory.getAdsDao().insert(ad);
+            ad.setId(DaoFactory.getAdsDao().insert(ad));
+            DaoFactory.getCategoriesDao().setCategories(ad, request.getParameterValues("categories"));
             response.sendRedirect("/ads");
         }
     }
