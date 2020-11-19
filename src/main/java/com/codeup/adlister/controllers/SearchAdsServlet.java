@@ -1,5 +1,7 @@
 package com.codeup.adlister.controllers;
 
+import com.codeup.adlister.dao.DaoFactory;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -16,6 +18,8 @@ public class SearchAdsServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String keywords = request.getParameter("searchAds");
         System.out.println(keywords);
+        request.setAttribute("keywords", keywords);
+        request.setAttribute("selectAds", DaoFactory.getAdsDao().searchAds(keywords));
         request.getRequestDispatcher("/WEB-INF/ads/search.jsp").forward(request, response);
     }
 }

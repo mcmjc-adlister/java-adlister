@@ -14,34 +14,18 @@
     </jsp:include>
 </head>
 <body>
-<h1>Search Page</h1>
-<%--<div class="container">--%>
-<%--    <h1>Create a new Ad</h1>--%>
-<%--    <form action="/ads/search" method="post">--%>
-<%--        <div class="form-group">--%>
-<%--            <label for="title">Title</label>--%>
-<%--            <input id="title" name="title" class="form-control" type="text">--%>
-<%--        </div>--%>
-<%--        <div class="container">--%>
-<%--            <div class="row">--%>
-<%--                <c:forEach items="${categories}" var="category">--%>
-<%--                    <div class="col-2 checkbox-inline">--%>
-<%--                        <label>--%>
-<%--                            <input type="checkbox"--%>
-<%--                                   id="${category.getCategory()}${category.getId()}" name="categories" value="${category.getCategory()}">--%>
-<%--                                ${category.getCategory()}--%>
-<%--                        </label>--%>
-<%--                    </div>--%>
-<%--                </c:forEach>--%>
-<%--            </div>--%>
-<%--        </div>--%>
+<jsp:include page="/WEB-INF/partials/navbar.jsp" />
 
-<%--        <div class="form-group">--%>
-<%--            <label for="description">Description</label>--%>
-<%--            <textarea id="description" name="description" class="form-control" type="text"></textarea>--%>
-<%--        </div>--%>
-<%--        <input type="submit" class="btn btn-block btn-primary">--%>
-<%--    </form>--%>
-<%--</div>--%>
+<div class="container">
+    <h1>Searched Ads</h1>
+
+    <c:forEach var="ad" items="${selectAds}">
+        <div class="col-md-6">
+            <h2>${ad.title}</h2>
+            <p>${ad.description}</p>
+        </div>
+    </c:forEach>
+</div>
+
 </body>
 </html>
