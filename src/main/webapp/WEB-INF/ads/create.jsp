@@ -14,21 +14,22 @@
             <label for="title">Title</label>
             <input id="title" name="title" class="form-control" type="text">
         </div>
-        <div class="container">
-            <div class="row">
-
-                <%-- TODO reduce number of categories? limit user to picking only 3? --%>
+        <%-- TODO reduce number of categories? limit user to picking only 3? --%>
+        <label>
+            Categories:<br>
+            <select class="custom-select" name="categories" id="categories" multiple>
                 <c:forEach items="${categories}" var="category">
-                    <div class="col-2 checkbox-inline">
-                        <label>
-                            <input type="checkbox"
-                                   id="${category.getCategory()}${category.getId()}" name="categories" value="${category.getCategory()}">
-                                <c:out value="${category.getCategory()}" />
-                        </label>
-                    </div>
+                    <option value="${category.getCategory()}"><c:out value="${category.getCategory()}" /></option>
+<%--                        <label>--%>
+<%--                            <input type="checkbox"--%>
+<%--                                   id="${category.getCategory()}${category.getId()}" name="categories"--%>
+<%--                                   value="${category.getCategory()}">--%>
+<%--                            <c:out value="${category.getCategory()}"/>--%>
+<%--                        </label>--%>
                 </c:forEach>
-            </div>
-        </div>
+            </select>
+        </label>
+
 
         <div class="form-group">
             <label for="description">Description</label>
