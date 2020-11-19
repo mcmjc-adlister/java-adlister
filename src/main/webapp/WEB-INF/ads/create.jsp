@@ -7,17 +7,41 @@
     </jsp:include>
 </head>
 <body>
-<div class="container">
-    <h1>Create a new Ad</h1>
-    <form action="/ads/create" method="post">
-        <div class="form-group">
-            <label for="title">Title</label>
-            <input id="title" name="title" class="form-control" type="text">
-        </div>
-        <%-- TODO reduce number of categories? limit user to picking only 3? --%>
-        <label>
-            Categories:<br>
-            <select class="custom-select" name="categories" id="categories" multiple>
+    <div class="container">
+        <h1>Create a new Ad</h1>
+        <jsp:include page="/WEB-INF/partials/error.jsp"/>
+        <form action="/ads/create" method="post">
+            <div class="form-group">
+                <label for="title">Title</label>
+                <%--Sticky forms check--%>
+                <c:choose>
+                    <%--If an enteredTitle value is passed in, fill it as the value for this input--%>
+                    <c:when test="${!(enteredTitle.equals(null))}">
+                        <input id="title" name="title" class="form-control" type="text" value="${enteredTitle}">
+                    </c:when>
+                    <%--Otherwise, as normal--%>
+                    <c:otherwise>
+                        <input id="title" name="title" class="form-control" type="text">
+                    </c:otherwise>
+                </c:choose>
+            </div>
+            <div class="form-group">
+                <label for="description">Description</label>
+                <c:choose>
+                    <%--If an enteredDescription value is passed in, fill it as the value for this input--%>
+                    <c:when test="${!(enteredDescription.equals(null))}">
+                        <textarea id="description" name="description" class="form-control" type="text">${enteredDescription}</textarea>
+                    </c:when>
+                    <%--Otherwise, as normal--%>
+                    <c:otherwise>
+                        <textarea id="description" name="description" class="form-control" type="text"></textarea>
+                    </c:otherwise>
+                </c:choose>
+            </div>
+            <input type="submit" class="btn btn-block btn-primary">
+        </form>
+    </div>
+<!--                 <%-- TODO reduce number of categories? limit user to picking only 3? --%>
                 <c:forEach items="${categories}" var="category">
                     <option value="${category.getCategory()}"><c:out value="${category.getCategory()}" /></option>
 <%--                        <label>--%>
@@ -27,6 +51,7 @@
 <%--                            <c:out value="${category.getCategory()}"/>--%>
 <%--                        </label>--%>
                 </c:forEach>
+
             </select>
         </label>
 
@@ -39,5 +64,9 @@
         <input type="submit" class="btn btn-block btn-primary">
     </form>
 </div>
+
+            </div>
+        </div> -->
+
 </body>
 </html>

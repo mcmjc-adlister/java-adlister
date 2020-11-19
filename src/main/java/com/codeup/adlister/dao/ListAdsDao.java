@@ -48,6 +48,8 @@ public class ListAdsDao implements Ads {
 
     }
 
+    public List<Ad> searchAds(String keywords) {return null;}
+
     private List<Ad> generateAds() {
         List<Ad> ads = new ArrayList<>();
         ads.add(new Ad(

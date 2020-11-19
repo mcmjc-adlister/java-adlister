@@ -23,5 +23,6 @@
     </c:forEach>
 </div>
 
+<jsp:include page="../partials/JQuery.jsp" />
 </body>
 </html>
