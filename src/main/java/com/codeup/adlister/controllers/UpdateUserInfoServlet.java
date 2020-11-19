@@ -37,17 +37,17 @@ public class UpdateUserInfoServlet extends HttpServlet {
         String username = request.getParameter("username");
         String email = request.getParameter("email");
         String password = Password.hash(request.getParameter("password"));
-        boolean passwordConfirmation = Password.check(request.getParameter("confirm_password"), password);
-        boolean passwordRequirements = (Password.isValidPassword(password));
-        boolean emailRequirements = (Email.emailMeetsRequirements(email));
+        boolean passwordConfirmation = request.getParameter("confirm_password").equals(request.getParameter("password"));
+//        boolean passwordRequirements = (Password.isValidPassword(password));
+//        boolean emailRequirements = (Email.emailMeetsRequirements(email));
 
-
-        if (!emailRequirements)
-            request.setAttribute("error", "Email does not meet requirements");
-        request.getRequestDispatcher("/WEB-INF/editInfo.jsp").forward(request, response);
-        if (!passwordRequirements)
-            request.setAttribute("error", "Password does not meet requirements");
-        request.getRequestDispatcher("/WEB-INF/editInfo.jsp").forward(request, response);
+//
+//        if (!emailRequirements)
+//            request.setAttribute("error", "Email does not meet requirements");
+//        request.getRequestDispatcher("/WEB-INF/editInfo.jsp").forward(request, response);
+//        if (!passwordRequirements)
+//            request.setAttribute("error", "Password does not meet requirements");
+//        request.getRequestDispatcher("/WEB-INF/editInfo.jsp").forward(request, response);
 
         if (passwordConfirmation) {
             User user = new User(userId, username, email, password);

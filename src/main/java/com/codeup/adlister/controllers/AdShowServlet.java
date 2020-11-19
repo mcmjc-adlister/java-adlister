@@ -37,7 +37,8 @@ public class AdShowServlet extends HttpServlet {
 
         request.setAttribute("ad", ad);
         request.setAttribute("poster", user);
-        request.setAttribute("categories", DaoFactory.getCategoriesDao().getCategoriesByAdId(ad.getId()));
+        request.setAttribute("adCategories", DaoFactory.getCategoriesDao().getCategoriesByAdId(ad.getId()));
+        request.setAttribute("categories", DaoFactory.getCategoriesDao().all());
 
         request.getRequestDispatcher("/WEB-INF/ads/show.jsp").forward(request, response);
     }

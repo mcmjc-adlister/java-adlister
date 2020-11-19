@@ -10,10 +10,11 @@
 <jsp:include page="/WEB-INF/partials/navbar.jsp"/>
 
 <div class="container-fluid">
+
     <h1>Welcome, ${sessionScope.user.username}!</h1>
 
     <button><a href="${pageContext.request.contextPath}/update">Edit Profile</a></button>
-    <input type="hidden" name="id" id="id" form="editAd">
+
     <c:choose>
         <c:when test="${usersAds.isEmpty()}">
             <h2>No ads posted.</h2>
@@ -41,12 +42,11 @@
                             <a href="/ads/delete?id=${ad.getId()}">Delete</a>
                         </c:if>
                     </div>
-                    <!-- Modal -->
                 </c:forEach>
             </div>
         </c:otherwise>
     </c:choose>
-
+    <input type="hidden" name="id" id="id" form="editAd">
     <div class="modal fade" id="editModal" tabindex="-1" role="dialog"
          aria-labelledby="editModalLabel"
          aria-hidden="true">
@@ -86,6 +86,13 @@
             </div>
         </div>
     </div>
+    <script>
+        function fillModal(id, title, description) {
+            document.getElementById('id').value = id;
+            document.getElementById('title').value = title;
+            document.getElementById('description').value = description;
+        }
+    </script>
 
 </div>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
@@ -97,14 +104,6 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
-<script>
-    function fillModal(id, title, description) {
-        console.log("works");
 
-        document.getElementById('id').value = id
-        document.getElementById('title').value = title
-        document.getElementById('description').value = description
-    }
-</script>
 </body>
 </html>
