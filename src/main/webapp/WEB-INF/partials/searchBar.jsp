@@ -7,8 +7,10 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <li>
-    <div class="py-auto">
-    <label for="search">Search</label>
-    <input id="search" name="search" type="text">
-    </div>
+    <form method="POST" action="/ads/search">
+        <div class="">
+            <label for="search">Search</label>
+            <input id="search" name="search" type="text">
+        </div>
+    </form>
 </li>

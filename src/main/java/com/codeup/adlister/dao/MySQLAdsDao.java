@@ -39,6 +39,16 @@ public class MySQLAdsDao implements Ads {
         }
     }
 
+//    public List<Ad> search() {
+//        PreparedStatement stmt = null;
+//        try {
+//            stmt = connection.prepareStatement("SELECT * FROM ads WHERE ad.title LIKE ?");
+//
+//        } catch (SQLException throwables) {
+//            throwables.printStackTrace();
+//        }
+//    }
+
     @Override
     public Long insert(Ad ad) {
 
