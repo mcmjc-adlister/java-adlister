@@ -41,7 +41,7 @@ CREATE TABLE ad_categories_join_table (
 
 
 INSERT INTO categories (category_name) VALUES
-('Arts & Crafts'),
+('Arts/Crafts'),
 ('Appliances'),
 ('Auto Parts'),
 ('Baby/Kid'),
@@ -52,7 +52,7 @@ INSERT INTO categories (category_name) VALUES
 ('Boat Parts'),
 ('Books'),
 ('Business'),
-('Cars & Trucks'),
+('Cars/Trucks'),
 ('CD/DVD'),
 ('Cell Phone'),
 ('Childcare'),
@@ -73,7 +73,7 @@ INSERT INTO categories (category_name) VALUES
 ('Music Instruments'),
 ('Office/Commercial'),
 ('Parking/Storage'),
-('Photo & Video'),
+('Photo/Video'),
 ('Rentals'),
 ('RV''s/Camping'),
 ('Sporting'),

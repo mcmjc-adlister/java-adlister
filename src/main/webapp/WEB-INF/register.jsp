@@ -15,24 +15,22 @@
             <div class="form-group">
                 <jsp:include page="partials/error.jsp"/>
                 <label for="username">Username</label>
-                <c:if test="${requestScope.usernameError != null}">
-                    <div class="alert alert-danger" role="alert">
-                            ${requestScope.usernameError}
-                    </div>
-                </c:if>
                 <input id="username" name="username" class="form-control" type="text">
             </div>
             <div class="form-group">
                 <label for="email">Email</label>
-                <c:if test="${requestScope.emailError != null}">
-                    <div class="alert alert-danger" role="alert">
-                            ${requestScope.emailError}
-                    </div>
-                </c:if>
                 <input id="email" name="email" class="form-control" type="text">
             </div>
             <div class="form-group">
                 <label for="password">Password</label>
+                <ul><h6>Password Requirements:</h6>
+                    <li>It contains at least 8 characters and at most 20 characters.</li>
+                    <li>It contains at least one digit.</li>
+                    <li>It contains at least one upper case alphabet.</li>
+                    <li>It contains at least one lower case alphabet.</li>
+                    <li>It contains at least one special character which includes !@#$%&*()-+=^.</li>
+                    <li>No spaces.</li>
+                </ul>
                 <input id="password" name="password" class="form-control" type="password">
             </div>
             <div class="form-group">

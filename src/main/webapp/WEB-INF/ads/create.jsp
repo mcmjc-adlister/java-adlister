@@ -16,12 +16,14 @@
         </div>
         <div class="container">
             <div class="row">
+
+                <%-- TODO reduce number of categories? limit user to picking only 3? --%>
                 <c:forEach items="${categories}" var="category">
                     <div class="col-2 checkbox-inline">
                         <label>
                             <input type="checkbox"
                                    id="${category.getCategory()}${category.getId()}" name="categories" value="${category.getCategory()}">
-                                ${category.getCategory()}
+                                <c:out value="${category.getCategory()}" />
                         </label>
                     </div>
                 </c:forEach>
