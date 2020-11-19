@@ -17,8 +17,8 @@
     <c:forEach var="ad" items="${ads}">
         <div class="col-md-6">
         <%-- TODO make ads clickable to go to its own page -> show.jsp?id= --%>
-            <a href="show?id=${ad.getId()}"><h2>${ad.title}</h2></a>
-            <p>${ad.description}</p>
+            <a href="show?id=${ad.getId()}"><h2><c:out value="${ad.title}" /></h2></a>
+            <p><c:out value="${ad.description}" /></p>
         </div>
     </c:forEach>
 </div>

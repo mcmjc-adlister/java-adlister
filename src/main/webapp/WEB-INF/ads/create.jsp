@@ -23,7 +23,7 @@
                         <label>
                             <input type="checkbox"
                                    id="${category.getCategory()}${category.getId()}" name="categories" value="${category.getCategory()}">
-                                ${category.getCategory()}
+                                <c:out value="${category.getCategory()}" />
                         </label>
                     </div>
                 </c:forEach>

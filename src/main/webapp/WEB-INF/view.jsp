@@ -8,8 +8,10 @@
 </head>
 <body>
 
+<h3><c:out value="${cat}" /></h3>
+
 <c:forEach items="${ads}" var="ad">
-    ${ad.getTitle()}
+    <a href="/show?id=${ad.getId()}"><c:out value="${ad.getTitle()}" /></a>
 </c:forEach>
 
 </body>

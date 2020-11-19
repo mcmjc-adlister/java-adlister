@@ -32,6 +32,7 @@ public class ViewFilterServlet extends HttpServlet {
         }
 
         request.setAttribute("ads", adList);
+        request.setAttribute("cat", categoryName);
         request.getRequestDispatcher("/WEB-INF/view.jsp").forward(request, response);
     }
 }
