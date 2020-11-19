@@ -14,7 +14,17 @@
         <form action="/login" method="POST">
             <div class="form-group">
                 <label for="username">Username</label>
-                <input id="username" name="username" class="form-control" type="text">
+<%--                Sticky forms check--%>
+                <c:choose>
+<%--                If an enteredUsername value is passed in, fill it as the value for this input--%>
+                    <c:when test="${!(enteredUsername.equals(null))}">
+                        <input id="username" name="username" class="form-control" type="text" value="${enteredUsername}">
+                    </c:when>
+<%--                Otherwise, as normal--%>
+                    <c:otherwise>
+                        <input id="username" name="username" class="form-control" type="text">
+                    </c:otherwise>
+                </c:choose>
             </div>
             <div class="form-group">
                 <label for="password">Password</label>
