@@ -24,5 +24,6 @@
             <input type="submit" class="btn btn-primary btn-block" value="Log In">
         </form>
     </div>
+<jsp:include page="partials/JQuery.jsp" />
 </body>
 </html>
