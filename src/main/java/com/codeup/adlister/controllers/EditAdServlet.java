@@ -16,15 +16,21 @@ import java.util.Arrays;
 
 @WebServlet(name = "EditAdServlet", urlPatterns="/ads/edit")
 public class EditAdServlet extends HttpServlet {
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        HttpSession session = request.getSession();
 
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        System.out.println(request.getParameter("id"));
+
+        HttpSession session = request.getSession();
         Long id = Long.parseLong(request.getParameter("id"));
         String title = request.getParameter("title");
         String description = request.getParameter("description");
 
-
-
+        System.out.println("id = " + id);
+        System.out.println("title = " + title);
+        System.out.println("description = " + description);
+        System.out.println("request.getParameterValues(\"newCategories\") = " + Arrays.toString(request.getParameterValues("newCategories")));
+        
         Ads ads = DaoFactory.getAdsDao();
         Ad ad = ads.getAdByID(id);
         User user = (User) session.getAttribute("user");
@@ -34,17 +40,15 @@ public class EditAdServlet extends HttpServlet {
             return;
         }
 
-        //TODO add ability to send new category information to be placed in join table
-        // code below will work given the edit form's name is 'categories'
-        //DaoFactory.getCategoriesDao().deleteEntries(id);
+        DaoFactory.getCategoriesDao().deleteEntries(id);
         ads.updateAd(new Ad(ad.getId(), ad.getUserId(), title, description));
-        //DaoFactory.getCategoriesDao().setCategories(ad, request.getParameterValues("categories");
+        DaoFactory.getCategoriesDao().setCategories(ad, request.getParameterValues("newCategories"));
 
-        response.sendRedirect("/ads/show?id=" + ad.getId());
+        response.sendRedirect("/show?id=" + ad.getId());
     }
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // TODO may need to make servlet code from doGet work in doPost instead
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
     }
 
 }

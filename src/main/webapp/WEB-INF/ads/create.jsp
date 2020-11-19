@@ -43,15 +43,30 @@
     </div>
 <!--                 <%-- TODO reduce number of categories? limit user to picking only 3? --%>
                 <c:forEach items="${categories}" var="category">
-                    <div class="col-2 checkbox-inline">
-                        <label>
-                            <input type="checkbox"
-                                   id="${category.getCategory()}${category.getId()}" name="categories" value="${category.getCategory()}">
-                                <c:out value="${category.getCategory()}" />
-                        </label>
-                    </div>
+                    <option value="${category.getCategory()}"><c:out value="${category.getCategory()}" /></option>
+<%--                        <label>--%>
+<%--                            <input type="checkbox"--%>
+<%--                                   id="${category.getCategory()}${category.getId()}" name="categories"--%>
+<%--                                   value="${category.getCategory()}">--%>
+<%--                            <c:out value="${category.getCategory()}"/>--%>
+<%--                        </label>--%>
                 </c:forEach>
+
+            </select>
+        </label>
+
+
+        <div class="form-group">
+            <label for="description">Description</label>
+            <textarea id="description" name="description" class="form-control" type="text"></textarea>
+        </div>
+
+        <input type="submit" class="btn btn-block btn-primary">
+    </form>
+</div>
+
             </div>
         </div> -->
+
 </body>
 </html>

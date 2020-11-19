@@ -46,6 +46,7 @@ public class CreateAdServlet extends HttpServlet {
         String title = request.getParameter("title");
         String description = request.getParameter("description");
 
+
         //validate input
         boolean inputHasErrors = title.isEmpty() || description.isEmpty();
 

@@ -50,6 +50,7 @@ public class UpdateUserInfoServlet extends HttpServlet {
                     e.printStackTrace();
                 }
                 resp.sendRedirect("/profile");
+
             }
         }
     }
