@@ -11,23 +11,23 @@
 <jsp:include page="/WEB-INF/partials/navbar.jsp"/>
 <div class="container">
 <%-- TODO white text on white background currently makes them unreadable --%>
-    <h1 class="text-center text-white">${sessionScope.user.username}'s Information</h1>
+    <h1 class="text-center">${sessionScope.user.username}'s Information</h1>
     <hr>
     <jsp:include page="partials/error.jsp"/>
     <form action="/update" method="post">
-        <div class="form-group text-white">
+        <div class="form-group">
             <label for="username">Username</label>
             <input id="username"  value="<c:out value='${user.username}' />" name="username" class="form-control" type="text">
         </div>
-        <div class="form-group text-white">
+        <div class="form-group">
             <label for="email">Email</label>
             <input id="email" value="<c:out value='${user.email}' />" name="email" class="form-control" type="text">
         </div>
-        <div class="form-group text-white">
+        <div class="form-group">
             <label for="password">Password</label>
             <input id="password" value="<c:out value='${password}' />" name="password" class="form-control" type="password">
         </div>
-        <div class="form-group text-white">
+        <div class="form-group">
             <label for="confirm_password">Confirm Password</label>
             <input id="confirm_password" value="<c:out value='${password}' />" name="confirm_password" class="form-control" type="password">
         </div>
