@@ -64,7 +64,8 @@ public class RegisterServlet extends HttpServlet {
             } else if (!emailRequirements) {
                 request.setAttribute("error", "Invalid email");
                 request.getRequestDispatcher("/WEB-INF/register.jsp").forward(request, response);
-            }
+            } response.sendRedirect("/register");
+            return;
         }
             // create and save a new user
             User user = new User(username, email, password);
