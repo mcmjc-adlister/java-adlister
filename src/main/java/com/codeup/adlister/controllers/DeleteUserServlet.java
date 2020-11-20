@@ -1,6 +1,7 @@
 package com.codeup.adlister.controllers;
 
 import com.codeup.adlister.dao.DaoFactory;
+import com.codeup.adlister.models.Ad;
 import com.codeup.adlister.models.User;
 
 import javax.servlet.ServletException;
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 
 @WebServlet (name = "DeleteUserServlet", urlPatterns = "/delete")
 public class DeleteUserServlet extends HttpServlet {
@@ -26,7 +28,11 @@ public class DeleteUserServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         User current = (User) request.getSession().getAttribute("user");
         long userId = current.getId();
+
+        //TODO need to complete functionality of deleting all ads from user before deleting user
         try {
+            DaoFactory.getCategoriesDao().deleteEntries(userId);
+            DaoFactory.getAdsDao().deleteAllUserAds(userId);
             DaoFactory.getUsersDao().deleteUser((int) userId);
         } catch (SQLException e) {
             e.printStackTrace();
