@@ -29,17 +29,17 @@
                                 <a href="/show?id=${ad.getId()}" class="mr-auto"><h4><c:out
                                         value="${ad.title}"/></h4>
                                 </a>
-                                    <c:if test="${user.getId() == ad.getUserId()}">
-                                        <button type="button" class="btn btn-primary mr-2" data-toggle="modal"
-                                                data-target="#editModal"
-                                                onclick='fillModal("${ad.getId()}", "${ad.getTitle()}", "${ad.getDescription()}")'>
-                                            Edit
-                                        </button>
-                                        <button type="button" class="btn btn-danger"><a
-                                                href="/ads/delete?id=${ad.getId()}"
-                                                class="anchorStyleRemove">Delete</a>
-                                        </button>
-                                    </c:if>
+                                <c:if test="${user.getId() == ad.getUserId()}">
+                                    <button type="button" class="btn btn-primary mr-2" data-toggle="modal"
+                                            data-target="#editModal"
+                                            onclick='fillModal("${ad.getId()}", "${ad.getTitle()}", "${ad.getDescription()}")'>
+                                        Edit
+                                    </button>
+                                    <button type="button" class="btn btn-danger"><a
+                                            href="/ads/delete?id=${ad.getId()}"
+                                            class="anchorStyleRemove">Delete</a>
+                                    </button>
+                                </c:if>
                             </div>
                             <div class="card-body pb-0">
                                 <p class="card-title"><c:out value="${ad.description}"/></p>
