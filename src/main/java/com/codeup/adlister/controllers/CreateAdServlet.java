@@ -46,7 +46,6 @@ public class CreateAdServlet extends HttpServlet {
         String title = request.getParameter("title");
         String description = request.getParameter("description");
 
-
         //validate input
         boolean inputHasErrors = title.isEmpty() || description.isEmpty();
 
@@ -54,12 +53,11 @@ public class CreateAdServlet extends HttpServlet {
             if (title.isEmpty()) {
                 request.setAttribute("enteredDescription", description);
                 request.setAttribute("error", "Ad must have a title.");
-                request.getRequestDispatcher("/WEB-INF/ads/create.jsp").forward(request, response);
             } else if (description.isEmpty()) {
                 request.setAttribute("enteredTitle", title);
                 request.setAttribute("error", "Ad must have a description.");
-                request.getRequestDispatcher("/WEB-INF/ads/create.jsp").forward(request, response);
             }
+            response.sendRedirect("/ads/create");
         } else {
             //Create and save a new ad
             //TODO also insert category data into join table
@@ -69,9 +67,11 @@ public class CreateAdServlet extends HttpServlet {
                     description,
                     new Timestamp(new Date().getTime())
             );
+
+            System.out.println("request.getParameter(\"newCategories\") = " + request.getParameter("newCategories"));
             ad.setId(DaoFactory.getAdsDao().insert(ad));
             DaoFactory.getCategoriesDao().setCategories(ad, request.getParameterValues("newCategories"));
-            response.sendRedirect("/ads");
+            response.sendRedirect("/show?id=" + ad.getId());
         }
     }
 }
