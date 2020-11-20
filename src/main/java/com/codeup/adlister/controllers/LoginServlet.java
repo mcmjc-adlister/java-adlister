@@ -22,7 +22,7 @@ public class LoginServlet extends HttpServlet {
         request.getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
 
         HttpSession session = request.getSession();
-        String errorMessage = (String) session.getAttribute("passwordError");
+        String errorMessage = (String) session.getAttribute("error");
         if(errorMessage != null) {
             request.setAttribute("error", errorMessage);
             session.removeAttribute("error");//removes error message after session

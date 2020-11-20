@@ -13,16 +13,14 @@
 
 <div class="container-fluid">
 
-    <h1>Welcome, ${sessionScope.user.username}!</h1>
-
-    <button><a href="${pageContext.request.contextPath}/update">Edit Profile</a></button>
+    <h1>Welcome, ${sessionScope.user.username}!<a href="${pageContext.request.contextPath}/update" class="btn btn-primary ml-5" role="button">Edit Profile</a></h1>
 
     <c:choose>
         <c:when test="${usersAds.isEmpty()}">
-            <h2>No ads posted.</h2>
+            <h2>No ads posted. <a href="/ads/create" class="btn btn-primary ml-4" role="button">Create an Ad</a></h2>
         </c:when>
         <c:otherwise>
-            <h2 class="text-center">Your Ads</h2>
+            <h2 class="text-center">Your Ads <a href="/ads/create" class="btn btn-primary ml-4" role="button">Create an Ad</a></h2>
             <div class="row justify-content-center">
                 <c:forEach items="${usersAds}" var="ad">
                     <div class="col-auto mb-5">
