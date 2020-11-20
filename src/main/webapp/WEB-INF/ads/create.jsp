@@ -7,6 +7,7 @@
     </jsp:include>
 </head>
 <body class="bgColor">
+    <jsp:include page="/WEB-INF/partials/navbar.jsp"/>
     <div class="container">
         <h1>Create a new Ad</h1>
         <jsp:include page="/WEB-INF/partials/error.jsp"/>
