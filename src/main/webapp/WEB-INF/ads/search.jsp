@@ -22,7 +22,7 @@
     <c:forEach var="ad" items="${selectAds}">
         <div class="col-md-6">
             <a href="show?id=${ad.getId()}"><h2><c:out value="${ad.title}" /></h2></a>
-            <p>${ad.description}</p>
+            <p><c:out value="${ad.description}" /></p>
         </div>
     </c:forEach>
 </div>
