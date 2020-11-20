@@ -21,4 +21,7 @@
     .footerColor {
         background-color: #c04df9;
     }
+    .cardColor{
+        background-color: #c04df9;
+    }
 </style>
