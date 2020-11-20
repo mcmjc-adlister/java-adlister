@@ -33,7 +33,6 @@ public class CreateAdServlet extends HttpServlet {
         }
 
         List<Category> categories = DaoFactory.getCategoriesDao().all();
-
         request.setAttribute("categories", categories);
 
         request.getRequestDispatcher("/WEB-INF/ads/create.jsp")
@@ -46,20 +45,25 @@ public class CreateAdServlet extends HttpServlet {
         String title = request.getParameter("title");
         String description = request.getParameter("description");
 
-
         //validate input
-        boolean inputHasErrors = title.isEmpty() || description.isEmpty();
+        boolean inputHasErrors = title.isEmpty() ||
+                description.isEmpty() ||
+                request.getParameterValues("newCategories") == null;
 
         if (inputHasErrors) {
             if (title.isEmpty()) {
                 request.setAttribute("enteredDescription", description);
                 request.setAttribute("error", "Ad must have a title.");
-                request.getRequestDispatcher("/WEB-INF/ads/create.jsp").forward(request, response);
             } else if (description.isEmpty()) {
                 request.setAttribute("enteredTitle", title);
                 request.setAttribute("error", "Ad must have a description.");
-                request.getRequestDispatcher("/WEB-INF/ads/create.jsp").forward(request, response);
+            } else {
+                request.setAttribute("enteredDescription", description);
+                request.setAttribute("enteredTitle", title);
+                request.setAttribute("error", "Select at least one category");
             }
+            request.setAttribute("categories", DaoFactory.getCategoriesDao().all());
+            request.getRequestDispatcher("/WEB-INF/ads/create.jsp").forward(request, response);
         } else {
             //Create and save a new ad
             //TODO also insert category data into join table
@@ -69,9 +73,10 @@ public class CreateAdServlet extends HttpServlet {
                     description,
                     new Timestamp(new Date().getTime())
             );
+
             ad.setId(DaoFactory.getAdsDao().insert(ad));
             DaoFactory.getCategoriesDao().setCategories(ad, request.getParameterValues("newCategories"));
-            response.sendRedirect("/ads");
+            response.sendRedirect("/show?id=" + ad.getId());
         }
     }
 }

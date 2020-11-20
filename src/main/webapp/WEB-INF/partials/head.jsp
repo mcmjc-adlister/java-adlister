@@ -33,4 +33,7 @@
         height: 12rem;
         overflow: auto;
     }
+    .cardColor{
+        background-color: #c04df9;
+    }
 </style>

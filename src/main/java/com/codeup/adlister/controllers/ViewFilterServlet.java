@@ -24,6 +24,12 @@ public class ViewFilterServlet extends HttpServlet {
         //TODO breaks with category names including a '&'
         String categoryName = request.getParameter("category");
         Category cat = DaoFactory.getCategoriesDao().getCategoryByName(categoryName);
+
+        if (cat == null) {
+            response.sendRedirect("/ads");
+            return;
+        }
+
         List<Long> idList = DaoFactory.getCategoriesDao().getAdsByCategoryId(cat.getId());
         List<Ad> adList = new ArrayList<>();
 
