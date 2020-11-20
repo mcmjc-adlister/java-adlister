@@ -7,7 +7,7 @@
         <jsp:param name="title" value="Edit Profile Information"/>
     </jsp:include>
 </head>
-<body>
+<body class="bgColor">
 <jsp:include page="/WEB-INF/partials/navbar.jsp"/>
 <div class="container">
 <%-- TODO white text on white background currently makes them unreadable --%>
@@ -40,4 +40,5 @@
     </form>
 </div>
 </body>
+<jsp:include page="/WEB-INF/partials/footer.jsp"></jsp:include>
 </html>

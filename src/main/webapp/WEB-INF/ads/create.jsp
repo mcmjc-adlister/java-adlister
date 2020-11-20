@@ -6,7 +6,7 @@
         <jsp:param name="title" value="Create a new Ad"/>
     </jsp:include>
 </head>
-<body>
+<body class="bgColor">
     <div class="container">
         <h1>Create a new Ad</h1>
         <jsp:include page="/WEB-INF/partials/error.jsp"/>
@@ -69,4 +69,5 @@
         </div> -->
 
 </body>
+<jsp:include page="/WEB-INF/partials/footer.jsp"></jsp:include>
 </html>

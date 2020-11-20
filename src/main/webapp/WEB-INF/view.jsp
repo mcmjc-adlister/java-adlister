@@ -6,7 +6,7 @@
         <jsp:param name="title" value="Filter Results" />
     </jsp:include>
 </head>
-<body>
+<body class="bgColor">
 
 <h3><c:out value="${cat}" /></h3>
 
@@ -15,4 +15,5 @@
 </c:forEach>
 
 </body>
+<jsp:include page="/WEB-INF/partials/footer.jsp"></jsp:include>
 </html>

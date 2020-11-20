@@ -13,7 +13,7 @@
         <jsp:param name="title" value="Searched Ads"/>
     </jsp:include>
 </head>
-<body>
+<body class="bgColor">
 <jsp:include page="/WEB-INF/partials/navbar.jsp" />
 
 <div class="container">
@@ -28,4 +28,5 @@
 </div>
 
 </body>
+<jsp:include page="/WEB-INF/partials/footer.jsp"></jsp:include>
 </html>

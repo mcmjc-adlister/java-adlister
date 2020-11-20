@@ -9,8 +9,8 @@
 <li>
     <form method="POST" action="/ads/search">
         <div class="">
-            <label for="searchAds">Search</label>
-            <input id="searchAds" name="searchAds" type="text">
+            <label for="searchAds" class="textWhiteColor">Search</label>
+            <input id="searchAds" name="searchAds" type="text" class="navColor">
         </div>
     </form>
 </li>

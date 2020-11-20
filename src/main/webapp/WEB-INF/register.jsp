@@ -7,7 +7,7 @@
         <jsp:param name="title" value="Register For Our Site!" />
     </jsp:include>
 </head>
-<body>
+<body class="bgColor">
     <jsp:include page="partials/navbar.jsp" />
     <div class="container">
         <h1>Please fill in your information.</h1>
@@ -72,4 +72,5 @@
     </div>
     <jsp:include page="partials/JQuery.jsp" />
 </body>
+<jsp:include page="/WEB-INF/partials/footer.jsp"></jsp:include>
 </html>
