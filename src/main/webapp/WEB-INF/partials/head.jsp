@@ -21,6 +21,18 @@
     .footerColor {
         background-color: #c04df9;
     }
+    .anchorStyleRemove {
+        color: white;
+    }
+    .anchorStyleRemove:hover, .anchorStyleRemove:link, .anchorStyleRemove:visited {
+        color: white;
+        text-decoration: none;
+        cursor: pointer;
+    }
+    .card-title {
+        height: 12rem;
+        overflow: auto;
+    }
     .cardColor{
         background-color: #c04df9;
     }

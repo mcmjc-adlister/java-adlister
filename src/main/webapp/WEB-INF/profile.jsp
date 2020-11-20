@@ -15,37 +15,38 @@
 
     <h1>Welcome, ${sessionScope.user.username}!<a href="${pageContext.request.contextPath}/update"
                                                   class="btn btn-primary ml-5" role="button">Edit Profile</a></h1>
-
     <c:choose>
         <c:when test="${usersAds.isEmpty()}">
-
             <h2>No Rads posted. <a href="/ads/create" class="btn btn-primary ml-4" role="button">Create an Ad</a></h2>
         </c:when>
         <c:otherwise>
-
             <h2 class="text-center">Your Rads <a href="/ads/create" class="btn btn-primary ml-4" role="button">Create an Ad</a></h2>
             <div class="row justify-content-center">
-
                 <c:forEach items="${usersAds}" var="ad">
                     <div class="col-auto mb-5">
-                        <div class="card h-100 shadow p-3 mb-5 bg-white rounded" style="width: 30rem;">
-                            <div class="card-body cardColor shadow rounded">
-                                <a href="/show?id=${ad.getId()}"><h4 class="card-title text-center textWhiteColor"><c:out
-                                        value="${ad.title}"/></h4></a>
-                                <p class="card-title position-relative"><c:out value="${ad.description}"/></p>
-                                <p class="text-right position-absolute b-0" style="font-size: small;"><c:out
+                        <div class="card h-100" style="width: 30rem;">
+                            <div class="d-flex card-header">
+                                <a href="/show?id=${ad.getId()}" class="mr-auto"><h4><c:out
+                                        value="${ad.title}"/></h4>
+                                </a>
+                                <c:if test="${user.getId() == ad.getUserId()}">
+                                    <button type="button" class="btn btn-primary mr-2" data-toggle="modal"
+                                            data-target="#editModal"
+                                            onclick='fillModal("${ad.getId()}", "${ad.getTitle()}", "${ad.getDescription()}")'>
+                                        Edit
+                                    </button>
+                                    <button type="button" class="btn btn-danger"><a
+                                            href="/ads/delete?id=${ad.getId()}"
+                                            class="anchorStyleRemove">Delete</a>
+                                    </button>
+                                </c:if>
+                            </div>
+                            <div class="card-body pb-0">
+                                <p class="card-title"><c:out value="${ad.description}"/></p>
+                                <p class="text-right mb-1 mr-1" style="font-size: small;"><c:out
                                         value="Posted on: ${ad.timestamp}"/></p>
                             </div>
                         </div>
-                            <%-- TODO add ability to edit ad --%>
-                        <c:if test="${user.getId() == ad.getUserId()}">
-                            <button type="button" class="btn btn-primary" data-toggle="modal"
-                                    data-target="#editModal"
-                                    onclick='fillModal("${ad.getId()}", "${ad.getTitle()}", "${ad.getDescription()}")'>
-                                Edit
-                            </button>
-                            <a href="/ads/delete?id=${ad.getId()}">Delete</a>
-                        </c:if>
                     </div>
                 </c:forEach>
             </div>
