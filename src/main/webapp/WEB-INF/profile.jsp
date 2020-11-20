@@ -5,6 +5,8 @@
     <jsp:include page="/WEB-INF/partials/head.jsp">
         <jsp:param name="title" value="Your Profile"/>
     </jsp:include>
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
 </head>
 <body class="bgColor">
 <jsp:include page="/WEB-INF/partials/navbar.jsp"/>
@@ -65,8 +67,8 @@
                             <input type="text" id="title" name="title">
                         </label>
                         <label>Categories:
-                            <select class="custom-select" name="newCategories" id="newCategories"
-                                    multiple>
+                            <select class="selectpicker" data-width="fit" data-max-options="3" name="newCategories"
+                                    id="newCategories" multiple>
                                 <c:forEach items="${categories}" var="category">
                                     <option value="${category.getCategory()}">${category.getCategory()}</option>
                                     <c:out value="${category.getCategory()}"/>
@@ -104,6 +106,7 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
 
 </body>
 <jsp:include page="/WEB-INF/partials/footer.jsp"></jsp:include>

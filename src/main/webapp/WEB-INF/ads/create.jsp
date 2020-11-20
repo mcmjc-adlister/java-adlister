@@ -6,7 +6,6 @@
         <jsp:param name="title" value="Create a new Ad"/>
     </jsp:include>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
-    <script src="https://kit.fontawesome.com/6fa36e9c98.js" crossorigin="anonymous"></script>
 </head>
 <body class="bgColor">
 <div class="container">
