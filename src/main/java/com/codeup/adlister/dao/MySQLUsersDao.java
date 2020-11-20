@@ -8,6 +8,7 @@ import java.sql.*;
 public class MySQLUsersDao implements Users {
     private static final String DELETE_USERS_SQL = "DELETE FROM users WHERE id = ?";
     private Connection connection;
+    private PreparedStatement stmt;
 
     public MySQLUsersDao(Config config) {
         try {
@@ -26,7 +27,7 @@ public class MySQLUsersDao implements Users {
     public User findByUsername(String username) {
         String query = "SELECT * FROM users WHERE username = ? LIMIT 1";
         try {
-            PreparedStatement stmt = connection.prepareStatement(query);
+            stmt = connection.prepareStatement(query);
             stmt.setString(1, username);
             return extractUser(stmt.executeQuery());
         } catch (SQLException e) {
@@ -38,7 +39,7 @@ public class MySQLUsersDao implements Users {
     public Long insert(User user) {
         String query = "INSERT INTO users(username, email, password) VALUES (?, ?, ?)";
         try {
-            PreparedStatement stmt = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+            stmt = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             stmt.setString(1, user.getUsername());
             stmt.setString(2, user.getEmail());
             stmt.setString(3, user.getPassword());
@@ -53,7 +54,6 @@ public class MySQLUsersDao implements Users {
 
     @Override
     public User getUserByID(Long id) {
-        PreparedStatement stmt = null;
         try {
             stmt = connection.prepareStatement("SELECT * FROM users WHERE id = ?");
             stmt.setLong(1, id);
@@ -91,10 +91,12 @@ public class MySQLUsersDao implements Users {
         boolean rowDeleted;
         //TODO code is formatted awkwardly due to a (probably?) misplaced statement;
         // from testing delete, it currently seems to not delete the user
-        try (
-                PreparedStatement statement = connection.prepareStatement(DELETE_USERS_SQL);) {
-            statement.setInt(1, id);
-            rowDeleted = statement.executeUpdate() > 0;
+        try {
+            stmt = connection.prepareStatement(DELETE_USERS_SQL);
+            stmt.setInt(1, id);
+            rowDeleted = stmt.executeUpdate() > 0;
+        } catch (SQLException e) {
+            throw new SQLException("Error deleting user", e);
         }
         return rowDeleted;
     }
