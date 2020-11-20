@@ -19,7 +19,7 @@
             <h2>No Rads posted. <a href="/ads/create" class="btn btn-primary ml-4" role="button">Create an Ad</a></h2>
         </c:when>
         <c:otherwise>
-            <h2 class="text-center">Your RAds <a href="/ads/create" class="btn btn-primary ml-4" role="button">Create an Ad</a></h2>
+            <h2 class="text-center">Your Rads <a href="/ads/create" class="btn btn-primary ml-4" role="button">Create an Ad</a></h2>
             <div class="row justify-content-center">
 
                 <c:forEach items="${usersAds}" var="ad">
