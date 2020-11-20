@@ -8,6 +8,8 @@ import java.sql.*;
 public class MySQLUsersDao implements Users {
     private static final String DELETE_USERS_SQL = "DELETE FROM users WHERE id = ?";
     private Connection connection;
+    private PreparedStatement stmt;
+    private ResultSet rs;
 
     public MySQLUsersDao(Config config) {
         try {
@@ -26,7 +28,7 @@ public class MySQLUsersDao implements Users {
     public User findByUsername(String username) {
         String query = "SELECT * FROM users WHERE username = ? LIMIT 1";
         try {
-            PreparedStatement stmt = connection.prepareStatement(query);
+            stmt = connection.prepareStatement(query);
             stmt.setString(1, username);
             return extractUser(stmt.executeQuery());
         } catch (SQLException e) {
@@ -38,12 +40,12 @@ public class MySQLUsersDao implements Users {
     public Long insert(User user) {
         String query = "INSERT INTO users(username, email, password) VALUES (?, ?, ?)";
         try {
-            PreparedStatement stmt = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+            stmt = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             stmt.setString(1, user.getUsername());
             stmt.setString(2, user.getEmail());
             stmt.setString(3, user.getPassword());
             stmt.executeUpdate();
-            ResultSet rs = stmt.getGeneratedKeys();
+            rs = stmt.getGeneratedKeys();
             rs.next();
             return rs.getLong(1);
         } catch (SQLException e) {
@@ -53,11 +55,10 @@ public class MySQLUsersDao implements Users {
 
     @Override
     public User getUserByID(Long id) {
-        PreparedStatement stmt = null;
         try {
             stmt = connection.prepareStatement("SELECT * FROM users WHERE id = ?");
             stmt.setLong(1, id);
-            ResultSet rs = stmt.executeQuery();
+            rs = stmt.executeQuery();
             return extractUser(rs);
 
         } catch (SQLException e) {
@@ -72,12 +73,12 @@ public class MySQLUsersDao implements Users {
         boolean updated;
         String updateInfo = "update users set username = ?, email = ?, password = ? where id = ?";
         try {
-            PreparedStatement stmnt = connection.prepareStatement(updateInfo);
-            stmnt.setString(1, user.getUsername());
-            stmnt.setString(2, user.getEmail());
-            stmnt.setString(3, user.getPassword());
-            stmnt.setLong(4, user.getId());
-            stmnt.executeUpdate();
+            stmt = connection.prepareStatement(updateInfo);
+            stmt.setString(1, user.getUsername());
+            stmt.setString(2, user.getEmail());
+            stmt.setString(3, user.getPassword());
+            stmt.setLong(4, user.getId());
+            stmt.executeUpdate();
             updated = true;
         } catch (SQLException e) {
             throw new RuntimeException("error", e);
@@ -91,10 +92,12 @@ public class MySQLUsersDao implements Users {
         boolean rowDeleted;
         //TODO code is formatted awkwardly due to a (probably?) misplaced statement;
         // from testing delete, it currently seems to not delete the user
-        try (
-                PreparedStatement statement = connection.prepareStatement(DELETE_USERS_SQL);) {
-            statement.setInt(1, id);
-            rowDeleted = statement.executeUpdate() > 0;
+        try {
+            stmt = connection.prepareStatement(DELETE_USERS_SQL);
+            stmt.setInt(1, id);
+            rowDeleted = stmt.executeUpdate() > 0;
+        } catch (SQLException e) {
+            throw new SQLException("Error deleting user", e);
         }
         return rowDeleted;
     }

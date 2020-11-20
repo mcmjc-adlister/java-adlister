@@ -21,7 +21,7 @@ public class Password {
         // Regex to check valid password.
         String regex = "^(?=.*[0-9])"
                 + "(?=.*[a-z])(?=.*[A-Z])"
-                + "(?=.*[@#$%^&+=])"
+                + "(?=.*[@#$%^&+=!])"
                 + "(?=\\S+$).{8,20}$";
 
         // Compile the ReGex

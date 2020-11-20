@@ -16,6 +16,7 @@
             <li><a href = "/login" class="textWhiteColor"> Login </a></li>
             </c:if>
             <c:if test="${sessionScope.user != null}">
+            <li><a href="/profile" class="textWhiteColor">Profile</a ></li>
             <li><a href = "/logout" class="textWhiteColor"> Logout </a ></li >
             </c:if>
         </ul>

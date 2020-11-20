@@ -70,7 +70,7 @@ public class CreateAdServlet extends HttpServlet {
                     new Timestamp(new Date().getTime())
             );
             ad.setId(DaoFactory.getAdsDao().insert(ad));
-            DaoFactory.getCategoriesDao().setCategories(ad, request.getParameterValues("categories"));
+            DaoFactory.getCategoriesDao().setCategories(ad, request.getParameterValues("newCategories"));
             response.sendRedirect("/ads");
         }
     }

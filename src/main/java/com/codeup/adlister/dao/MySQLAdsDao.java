@@ -13,6 +13,8 @@ import java.util.List;
 
 public class MySQLAdsDao implements Ads {
     private Connection connection = null;
+    private PreparedStatement stmt;
+    private ResultSet rs;
 
     public MySQLAdsDao(Config config) {
         try {
@@ -29,10 +31,9 @@ public class MySQLAdsDao implements Ads {
 
     @Override
     public List<Ad> all() {
-        PreparedStatement stmt = null;
         try {
             stmt = connection.prepareStatement("SELECT * FROM ads");
-            ResultSet rs = stmt.executeQuery();
+            rs = stmt.executeQuery();
             return createAdsFromResults(rs);
         } catch (SQLException e) {
             throw new RuntimeException("Error retrieving all ads.", e);
@@ -45,10 +46,10 @@ public class MySQLAdsDao implements Ads {
             String sql = "SELECT * FROM ads WHERE ads.title LIKE ?";
             String safeSearch = "%" + keywords + "%";
 
-            PreparedStatement stmt = connection.prepareStatement(sql);
+            stmt = connection.prepareStatement(sql);
             stmt.setString(1, safeSearch);
 
-            ResultSet rs = stmt.executeQuery();
+            rs = stmt.executeQuery();
             List<Ad> ads = new ArrayList<>();
             while (rs.next()) {
                 ads.add(extractAd(rs));
@@ -65,13 +66,13 @@ public class MySQLAdsDao implements Ads {
         //TODO insert categories into join table as well
         try {
             String insertQuery = "INSERT INTO ads(user_id, title, description, time_stamp) VALUES (?, ?, ?, ?)";
-            PreparedStatement stmt = connection.prepareStatement(insertQuery, Statement.RETURN_GENERATED_KEYS);
+            stmt = connection.prepareStatement(insertQuery, Statement.RETURN_GENERATED_KEYS);
             stmt.setLong(1, ad.getUserId());
             stmt.setString(2, ad.getTitle());
             stmt.setString(3, ad.getDescription());
             stmt.setTimestamp(4, ad.getTimestamp());
             stmt.executeUpdate();
-            ResultSet rs = stmt.getGeneratedKeys();
+            rs = stmt.getGeneratedKeys();
             rs.next();
             return rs.getLong(1);
         } catch (SQLException e) {
@@ -81,7 +82,6 @@ public class MySQLAdsDao implements Ads {
 
     @Override
     public boolean deleteByID(Long id) {
-        PreparedStatement stmt = null;
         try {
             stmt = connection.prepareStatement("DELETE FROM ads WHERE id = ?");
             stmt.setLong(1, id);
@@ -91,14 +91,24 @@ public class MySQLAdsDao implements Ads {
         }
     }
 
+
+    public void deleteAllUserAds(Long id) {
+        try {
+            stmt = connection.prepareStatement("DELETE FROM ads WHERE user_id = ?");
+            stmt.setLong(1, id);
+
+            stmt.execute();
+        } catch (SQLException e) {
+            throw new RuntimeException("Error deleting all ads.", e);
+        }
+    }
+
     @Override
     public Ad getAdByID(Long id) {
-
-        PreparedStatement stmt = null;
         try {
             stmt = connection.prepareStatement("SELECT * FROM ads WHERE id = ?");
             stmt.setLong(1, id);
-            ResultSet rs = stmt.executeQuery();
+            rs = stmt.executeQuery();
             if (rs.next()) {
                 return extractAd(rs);
             }
@@ -110,11 +120,10 @@ public class MySQLAdsDao implements Ads {
 
     @Override
     public List<Ad> getAdsByUser(User user) {
-        PreparedStatement stmt = null;
         try {
             stmt = connection.prepareStatement("SELECT * FROM ads WHERE user_id = ?");
             stmt.setLong(1, user.getId());
-            ResultSet rs = stmt.executeQuery();
+            rs = stmt.executeQuery();
             return createAdsFromResults(rs);
         } catch (SQLException e) {
             throw new RuntimeException("Error retrieving user's ads.", e);
@@ -122,9 +131,7 @@ public class MySQLAdsDao implements Ads {
     }
           
     public boolean updateAd(Ad ad) {
-
         //TODO update categories in join table
-        PreparedStatement stmt = null;
         try {
             stmt = connection.prepareStatement("UPDATE ads " +
                     "SET title = ?, description = ?" +
