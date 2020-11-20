@@ -5,6 +5,8 @@
     <jsp:include page="/WEB-INF/partials/head.jsp">
         <jsp:param name="title" value="${ad.getTitle()}"/>
     </jsp:include>
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
 </head>
 <body class="bgColor">
 
@@ -13,18 +15,20 @@
 <div class="container">
     <div class="card">
         <h2 class="card-title"><c:out value="${ad.getTitle()}"/></h2>
-        <span class="card-subtitle"><c:out value="posted by ${poster.getUsername()} at ${ad.getTimestamp().toString()} UTC" /></span>
+        <span class="card-subtitle"><c:out
+                value="posted by ${poster.getUsername()} at ${ad.getTimestamp().toString()} UTC"/></span>
         <ul class="card-subtitle d-flex m-0 p-0 pt-1" style="list-style: none; font-size: 12px">
             <li class="pr-2">Categories:</li>
             <c:forEach items="${adCategories}" var="category">
-                <li class="pr-2"><a href="/view?category=${category}"><c:out value="${category}" /></a></li>
+                <li class="pr-2"><a href="/view?category=${category}"><c:out value="${category}"/></a></li>
             </c:forEach>
         </ul>
         <p class="card-text"><c:out value="${ad.getDescription()}"/></p>
     </div>
     <c:if test="${ad.getUserId() == user.getId()}">
         <button type="button" class="btn btn-primary" data-toggle="modal"
-                data-target="#editModal" onclick='fillModal("${ad.getId()}", "${ad.getTitle()}", "${ad.getDescription()}")'>
+                data-target="#editModal"
+                onclick='fillModal("${ad.getId()}", "${ad.getTitle()}", "${ad.getDescription()}")'>
             Edit
         </button>
         <a href="/ads/delete?id=${ad.getId()}">Delete</a>
@@ -48,15 +52,15 @@
                             Title<br>
                             <input type="text" id="title" name="title">
                         </label>
-                        <label>Categories:
-                            <select class="custom-select" name="newCategories" id="newCategories"
-                                    multiple>
+                        <label>Categories: (select up to three)
+                            <select class="selectpicker" data-width="fit" data-max-options="3" name="newCategories"
+                                    id="newCategories" multiple>
                                 <c:forEach items="${categories}" var="category">
                                     <option value="${category.getCategory()}">${category.getCategory()}</option>
-                                    <c:out value="${category.getCategory()}"/>
                                 </c:forEach>
                             </select>
                         </label>
+
                         <label>
                             Description<br>
                             <textarea id="description" name="description"></textarea>
@@ -87,6 +91,7 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
 </body>
 <jsp:include page="/WEB-INF/partials/footer.jsp"></jsp:include>
 </html>
