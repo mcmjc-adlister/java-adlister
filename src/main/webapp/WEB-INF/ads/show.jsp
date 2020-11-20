@@ -6,7 +6,7 @@
         <jsp:param name="title" value="${ad.getTitle()}"/>
     </jsp:include>
 </head>
-<body>
+<body class="bgColor">
 
 <jsp:include page="/WEB-INF/partials/navbar.jsp"/>
 
@@ -88,4 +88,5 @@
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
 </body>
+<jsp:include page="/WEB-INF/partials/footer.jsp"></jsp:include>
 </html>
