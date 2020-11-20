@@ -10,6 +10,7 @@
             <a href = "/login" class="textWhiteColor mr-4"> Login </a>
         </c:if>
         <c:if test="${sessionScope.user != null}">
+            <a href="/ads/create" class="textWhiteColor mr-4">Create Ad</a>
             <a href="/profile" class="textWhiteColor mr-4">Profile</a>
             <a href = "/logout" class="textWhiteColor mr-4"> Logout </a>
         </c:if>
