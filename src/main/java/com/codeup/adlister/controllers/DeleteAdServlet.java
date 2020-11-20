@@ -31,11 +31,12 @@ public class DeleteAdServlet extends HttpServlet {
 
         DaoFactory.getCategoriesDao().deleteEntries(id);
         DaoFactory.getAdsDao().deleteByID(id);
-
+        response.sendRedirect("/profile");
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         //TODO may need to move code into doPost instead
+
     }
 
 }
