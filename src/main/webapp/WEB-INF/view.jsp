@@ -7,7 +7,7 @@
     </jsp:include>
 </head>
 <body class="bgColor">
-
+<jsp:include page="partials/navbar.jsp" />
 <h3><c:out value="${cat}" /></h3>
 
 <c:forEach items="${ads}" var="ad">
