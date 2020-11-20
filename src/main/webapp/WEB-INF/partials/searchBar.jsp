@@ -7,8 +7,8 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <li>
-    <form method="POST" action="/ads/search">
-        <div class="">
+    <form method="POST" action="/search">
+        <div>
             <label for="searchAds" class="textWhiteColor">Search</label>
             <input id="searchAds" name="searchAds" type="text" class="navColor">
         </div>
