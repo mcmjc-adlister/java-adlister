@@ -33,7 +33,6 @@ public class CreateAdServlet extends HttpServlet {
         }
 
         List<Category> categories = DaoFactory.getCategoriesDao().all();
-
         request.setAttribute("categories", categories);
 
         request.getRequestDispatcher("/WEB-INF/ads/create.jsp")
@@ -47,7 +46,9 @@ public class CreateAdServlet extends HttpServlet {
         String description = request.getParameter("description");
 
         //validate input
-        boolean inputHasErrors = title.isEmpty() || description.isEmpty();
+        boolean inputHasErrors = title.isEmpty() ||
+                description.isEmpty() ||
+                request.getParameterValues("newCategories") == null;
 
         if (inputHasErrors) {
             if (title.isEmpty()) {
@@ -56,8 +57,13 @@ public class CreateAdServlet extends HttpServlet {
             } else if (description.isEmpty()) {
                 request.setAttribute("enteredTitle", title);
                 request.setAttribute("error", "Ad must have a description.");
+            } else {
+                request.setAttribute("enteredDescription", description);
+                request.setAttribute("enteredTitle", title);
+                request.setAttribute("error", "Select at least one category");
             }
-            response.sendRedirect("/ads/create");
+            request.setAttribute("categories", DaoFactory.getCategoriesDao().all());
+            request.getRequestDispatcher("/WEB-INF/ads/create.jsp").forward(request, response);
         } else {
             //Create and save a new ad
             //TODO also insert category data into join table
@@ -68,7 +74,6 @@ public class CreateAdServlet extends HttpServlet {
                     new Timestamp(new Date().getTime())
             );
 
-            System.out.println("request.getParameter(\"newCategories\") = " + request.getParameter("newCategories"));
             ad.setId(DaoFactory.getAdsDao().insert(ad));
             DaoFactory.getCategoriesDao().setCategories(ad, request.getParameterValues("newCategories"));
             response.sendRedirect("/show?id=" + ad.getId());
