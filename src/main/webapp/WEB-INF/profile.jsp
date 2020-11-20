@@ -17,19 +17,19 @@
 
     <c:choose>
         <c:when test="${usersAds.isEmpty()}">
-            <h2>No ads posted.</h2>
+            <h2>No Rads posted.</h2>
         </c:when>
         <c:otherwise>
-            <h2 class="text-center">Your Ads</h2>
-            <div class="row justify-content-center">
+            <h1 class="text-center">Your Rads!</h1>
+            <div class="row justify-content-center textWhiteColor">
                 <c:forEach items="${usersAds}" var="ad">
                     <div class="col-auto mb-5">
-                        <div class="card h-100" style="width: 30rem;">
-                            <div class="card-body">
-                                <a href="/show?id=${ad.getId()}"><h4 class="card-title text-center"><c:out
+                        <div class="card h-100 shadow p-3 mb-5 bg-white rounded" style="width: 30rem;">
+                            <div class="card-body cardColor shadow rounded">
+                                <a href="/show?id=${ad.getId()}"><h4 class="card-title text-center textWhiteColor"><c:out
                                         value="${ad.title}"/></h4></a>
-                                <p class="card-title"><c:out value="${ad.description}"/></p>
-                                <p class="text-right" style="font-size: small;"><c:out
+                                <p class="card-title position-relative"><c:out value="${ad.description}"/></p>
+                                <p class="text-right position-absolute b-0" style="font-size: small;"><c:out
                                         value="Posted on: ${ad.timestamp}"/></p>
                             </div>
                         </div>
