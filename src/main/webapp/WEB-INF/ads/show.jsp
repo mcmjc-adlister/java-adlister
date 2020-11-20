@@ -47,6 +47,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
+                    <span id="errorMsg"></span>
                     <form method="POST" action="/ads/edit" id="editAd">
                         <label>
                             Title<br>
@@ -56,7 +57,14 @@
                             <select class="selectpicker" data-width="fit" data-max-options="3" name="newCategories"
                                     id="newCategories" multiple>
                                 <c:forEach items="${categories}" var="category">
-                                    <option value="${category.getCategory()}">${category.getCategory()}</option>
+                                    <c:choose>
+                                        <c:when test="${adCategories.contains(category.getCategory())}">
+                                            <option value="${category.getCategory()}" selected>${category.getCategory()}</option>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <option value="${category.getCategory()}">${category.getCategory()}</option>
+                                        </c:otherwise>
+                                    </c:choose>
                                 </c:forEach>
                             </select>
                         </label>
@@ -69,7 +77,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary" form="editAd">Save changes</button>
+                    <button type="button" class="btn btn-primary" form="editAd" onclick="submitTest()">Save changes</button>
                 </div>
             </div>
         </div>
@@ -80,6 +88,25 @@
             document.getElementById('title').value = title;
             document.getElementById('description').value = description;
         }
+
+        function submitTest() {
+
+            let err = document.getElementById("errorMsg");
+
+            console.log(document.getElementById("newCategories").value);
+
+            if (document.getElementById("title").value.trim().length === 0 ) {
+                err.innerText = "A title must be entered";
+            } else if (document.getElementById("description").value.trim().length === 0) {
+                err.innerText = "A description must be entered";
+            } else if (document.getElementById("newCategories").value === "") {
+                err.innerText = "At least one category must be selected";
+            } else {
+                err.innerText = "";
+                document.getElementById("editAd").submit();
+            }
+        }
+
     </script>
 </div>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
