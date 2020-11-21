@@ -76,7 +76,7 @@ INSERT INTO categories (category_name) VALUES
 ('Parking/Storage'),
 ('Photo/Video'),
 ('Rentals'),
-('RV''s/Camping'),
+('RVs/Camping'),
 ('Sporting'),
 ('Tools'),
 ('Toys/Games'),
