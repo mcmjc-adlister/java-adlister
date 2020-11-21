@@ -10,7 +10,6 @@
 </head>
 <body class="bgColor">
 <jsp:include page="/WEB-INF/partials/navbar.jsp"/>
-
 <div class="container-fluid">
 
     <h1>Welcome, ${sessionScope.user.username}!<a href="${pageContext.request.contextPath}/update"
@@ -32,6 +31,11 @@
                             <div class="card-body cardColor shadow rounded">
                                 <a href="/show?id=${ad.getId()}"><h4 class="card-title text-center textWhiteColor"><c:out
                                         value="${ad.title}"/></h4></a>
+                                <c:forEach items="${adCategories.get(ad.getId())}" var="cats">
+                                    <c:forEach items="${cats}" var="cat">
+                                        ${cat}
+                                    </c:forEach>
+                                </c:forEach>
                                 <p class="card-title position-relative"><c:out value="${ad.description}"/></p>
                                 <p class="text-right position-absolute b-0" style="font-size: small;"><c:out
                                         value="Posted on: ${ad.timestamp}"/></p>
@@ -41,7 +45,7 @@
                         <c:if test="${user.getId() == ad.getUserId()}">
                             <button type="button" class="btn btn-primary" data-toggle="modal"
                                     data-target="#editModal"
-                                    onclick='fillModal("${ad.getId()}", "${ad.getTitle()}", "${ad.getDescription()}")'>
+                                    onclick="fillModal('${ad.getId()}', '${ad.getTitle()}', '${ad.getDescription()}', '${adCategories.get(ad.getId())}', '${categoryNames}')">
                                 Edit
                             </button>
                             <a href="/ads/delete?id=${ad.getId()}">Delete</a>
@@ -73,16 +77,8 @@
                         <label>Categories:
                             <select class="selectpicker" data-width="fit" data-max-options="3" name="newCategories"
                                     id="newCategories" multiple>
-                                <c:forEach items="${categories}" var="category">
-                                    <c:choose>
-                                        <c:when test="${adCategories.contains(category.getCategory())}">
-                                            <option value="${category.getCategory()}"
-                                                    selected>${category.getCategory()}</option>
-                                        </c:when>
-                                        <c:otherwise>
-                                            <option value="${category.getCategory()}">${category.getCategory()}</option>
-                                        </c:otherwise>
-                                    </c:choose>
+                                <c:forEach items="${categoryNames}" var="name">
+                                    <option value="${name}" id="${name}">${name}</option>
                                 </c:forEach>
                             </select>
                         </label>
@@ -101,10 +97,26 @@
     </div>
 </div>
 <script>
-    function fillModal(id, title, description) {
+    function fillModal(id, title, description, adCats, catNames) {
         document.getElementById('id').value = id;
         document.getElementById('title').value = title;
         document.getElementById('description').value = description;
+
+        let str = adCats.replace("[", "").replace("]", "");
+        let cats = catNames.replace("[", "").replace("]", "");
+
+        for (let cat of cats.split(",")) {
+            let option = document.getElementById(cat.trim());
+
+            for (let s of str.split(",")) {
+                console.log("s = " + s.trim());
+                if (cat.trim() === s.trim()) {
+                    option.selected = true;
+                }
+            }
+        }
+
+        $('.selectpicker').selectpicker('refresh');
     }
 
     function submitTest() {
