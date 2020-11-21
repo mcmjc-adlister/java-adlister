@@ -23,31 +23,6 @@
             <div class="row justify-content-center">
                 <c:forEach items="${usersAds}" var="ad">
                     <div class="col-auto mb-5">
-
-<!--                         <div class="card h-100 shadow p-3 mb-5 bg-white rounded" style="width: 30rem;">
-                            <div class="card-body cardColor shadow rounded">
-                                <a href="/show?id=${ad.getId()}"><h4 class="card-title text-center textWhiteColor"><c:out
-                                        value="${ad.title}"/></h4></a>
-                                <c:forEach items="${adCategories.get(ad.getId())}" var="cats">
-                                    <c:forEach items="${cats}" var="cat">
-                                        ${cat}
-                                    </c:forEach>
-                                </c:forEach>
-                                <p class="card-title position-relative"><c:out value="${ad.description}"/></p>
-                                <p class="text-right position-absolute b-0" style="font-size: small;"><c:out
-                                        value="Posted on: ${ad.timestamp}"/></p>
-                            </div>
-                        </div>
-                            <%-- TODO add ability to edit ad --%>
-                        <c:if test="${user.getId() == ad.getUserId()}">
-                            <button type="button" class="btn btn-primary" data-toggle="modal"
-                                    data-target="#editModal"
-                                    onclick="fillModal('${ad.getId()}', '${ad.getTitle()}', '${ad.getDescription()}', '${adCategories.get(ad.getId())}', '${categoryNames}')">
-                                Edit
-                            </button>
-                            <a href="/ads/delete?id=${ad.getId()}">Delete</a>
-                        </c:if>
- -->
                         <div class="card h-100" style="width: 30rem;">
                             <div class="d-flex card-header">
                                 <a href="/show?id=${ad.getId()}" class="mr-auto"><h4><c:out
@@ -56,7 +31,7 @@
                                 <c:if test="${user.getId() == ad.getUserId()}">
                                     <button type="button" class="btn btn-primary mr-2" data-toggle="modal"
                                             data-target="#editModal"
-                                            onclick='fillModal("${ad.getId()}", "${ad.getTitle()}", "${ad.getDescription()}")'>
+                                            onclick="fillModal('${ad.getId()}', '${ad.getTitle()}', '${ad.getDescription()}', '${adCategories.get(ad.getId())}', '${categoryNames}')">
                                         Edit
                                     </button>
                                     <button type="button" class="btn btn-danger"><a
@@ -67,8 +42,21 @@
                             </div>
                             <div class="card-body pb-0">
                                 <p class="card-title"><c:out value="${ad.description}"/></p>
-                                <p class="text-right mb-1 mr-1" style="font-size: small;"><c:out
+
+
+                                <div class="row justify-content-between">
+                                    <div>
+                                        <span class="pr-2" style="font-size: 12px;">Categories:</span>
+                                        <c:forEach items="${adCategories.get(ad.getId())}" var="cats">
+                                            <c:forEach items="${cats}" var="cat">
+                                                <a class="pr-2" style="font-size: 12px;" href="/view?category=${cat}"><c:out value="${cat}"/></a>
+                                            </c:forEach>
+                                        </c:forEach>
+                                    </div>
+
+                                    <p class="text-right mb-1 mr-1" style="font-size: small;"><c:out
                                         value="Posted on: ${ad.timestamp}"/></p>
+                                </div>
                             </div>
                         </div>
                     </div>
