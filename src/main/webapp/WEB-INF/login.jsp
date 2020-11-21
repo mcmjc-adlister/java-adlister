@@ -10,7 +10,6 @@
 <body class="bgColor">
     <jsp:include page="/WEB-INF/partials/navbar.jsp" />
     <div class="container">
-        <img src="<c:url value="/img/rad.png"/>" alt="" width="100" height="100">
         <h1>Please Log In</h1>
         <form action="/login" method="POST">
             <div class="form-group">
