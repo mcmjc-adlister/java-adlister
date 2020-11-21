@@ -2,7 +2,7 @@
 <nav class="navbar navbar-default navColor justify-content-between align-bottom">
     <div class="navbar-header">
         <a class="navbar-brand textWhiteColor" href="/ads">
-        <img src="<c:url value="/img/rad.png"/>" alt="" height="50" >
+        <img src="<c:url value="/img/rad.png"/>" alt="" height="75" width="100">
         </a>
     </div>
     <div class="d-inline-flex align-items-center">
