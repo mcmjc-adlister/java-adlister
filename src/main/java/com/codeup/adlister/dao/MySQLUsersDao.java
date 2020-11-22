@@ -73,7 +73,7 @@ public class MySQLUsersDao implements Users {
         boolean updated;
         String updateInfo = "update users set username = ?, email = ?, password = ? where id = ?";
         try {
-            stmt = connection.prepareStatement(updateInfo);
+            PreparedStatement stmt = connection.prepareStatement(updateInfo, Statement.RETURN_GENERATED_KEYS);
             stmt.setString(1, user.getUsername());
             stmt.setString(2, user.getEmail());
             stmt.setString(3, user.getPassword());
