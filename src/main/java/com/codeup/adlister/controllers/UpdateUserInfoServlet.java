@@ -13,6 +13,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
 
@@ -26,6 +27,13 @@ public class UpdateUserInfoServlet extends HttpServlet {
 
         //TODO page is directly accessible without being logged in; change
         request.getRequestDispatcher("/WEB-INF/editInfo.jsp").forward(request, resp);
+
+        HttpSession session = request.getSession();
+        String errorMessage = (String) session.getAttribute("error");
+        if (errorMessage != null) {
+            request.setAttribute("error", errorMessage);
+            session.removeAttribute("error");//removes error message after session
+        }
     }
 
     @Override
@@ -50,6 +58,21 @@ public class UpdateUserInfoServlet extends HttpServlet {
                 || (!emailRequirements);
 
         if (inputHasErrors) {
+            request.getSession().setAttribute("enteredUsername", username);
+            request.getSession().setAttribute("enteredEmail", email);
+            if (password.isEmpty()) {
+                request.setAttribute("error", "Enter password to confirm change");
+                request.getRequestDispatcher("/WEB-INF/editInfo.jsp").forward(request, response);
+            } else if (!password.equals(passwordConfirmation)) {
+                request.setAttribute("error", "Passwords do not match");
+                request.getRequestDispatcher("/WEB-INF/editInfo.jsp").forward(request, response);
+            } else if (!passwordRequirements) {
+                request.setAttribute("error", "Password does not meet requirements");
+                request.getRequestDispatcher("/WEB-INF/editInfo.jsp").forward(request, response);
+            } else if (!emailRequirements) {
+                request.setAttribute("error", "Invalid email");
+                request.getRequestDispatcher("/WEB-INF/editInfo.jsp").forward(request, response);
+            }
             response.sendRedirect("/update");
             return;
         }
@@ -64,6 +87,9 @@ public class UpdateUserInfoServlet extends HttpServlet {
             e.printStackTrace();
         }
         response.sendRedirect("/profile");
+    }
+}
+
 //            long userId = current.getId();
 //            String username = req.getParameter("username");
 //            String email = req.getParameter("email");
@@ -80,8 +106,8 @@ public class UpdateUserInfoServlet extends HttpServlet {
 //                    e.printStackTrace();
 //                }
 //                resp.sendRedirect("/profile");
+//}
 
-    }
-}
+
 
 
