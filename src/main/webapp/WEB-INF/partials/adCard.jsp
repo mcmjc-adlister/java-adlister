@@ -21,9 +21,12 @@
                     <c:forEach items="${adCategories}" var="category">
                         <li class="pr-2"><a href="/view?category=${category}"><c:out value="${category}"/></a></li>
                     </c:forEach>
+                    <li class="ml-auto">
+                        <p class="text-right mb-1 mr-1" style="font-size: small;"><c:out
+                                value="posted by ${poster.getUsername()} at ${ad.getTimestamp().toString()} UTC"/></p>
+                    </li>
                 </ul>
-                <p class="text-right mb-1 mr-1" style="font-size: small;"><c:out
-                        value="posted by ${poster.getUsername()} at ${ad.getTimestamp().toString()} UTC"/></p>
+
             </div>
         </div>
 

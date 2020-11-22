@@ -14,16 +14,6 @@
 
 <div class="container">
     <%@ include file="../partials/adCard.jsp" %>
-
-<%--    <c:if test="${ad.getUserId() == user.getId()}">--%>
-<%--        <button type="button" class="btn btn-primary" data-toggle="modal"--%>
-<%--                data-target="#editModal"--%>
-<%--                onclick='fillModal("${ad.getId()}", "${ad.getTitle()}", "${ad.getDescription()}")'>--%>
-<%--            Edit--%>
-<%--        </button>--%>
-<%--        <a href="/ads/delete?id=${ad.getId()}">Delete</a>--%>
-<%--    </c:if>--%>
-
     <input type="hidden" name="id" id="id" form="editAd">
     <div class="modal fade" id="editModal" tabindex="-1" role="dialog"
          aria-labelledby="editModalLabel"
