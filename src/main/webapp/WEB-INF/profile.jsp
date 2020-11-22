@@ -20,48 +20,7 @@
         </c:when>
         <c:otherwise>
             <h2 class="text-center">Your Rads <a href="/ads/create" class="btn btn-primary ml-4" role="button">Create an Ad</a></h2>
-            <div class="row justify-content-center">
-                <c:forEach items="${usersAds}" var="ad">
-                    <div class="col-auto mb-5">
-                        <div class="card h-100" style="width: 30rem;">
-                            <div class="d-flex card-header">
-                                <a href="/show?id=${ad.getId()}" class="mr-auto"><h4><c:out
-                                        value="${ad.title}"/></h4>
-                                </a>
-                                <c:if test="${user.getId() == ad.getUserId()}">
-                                    <button type="button" class="btn btn-primary mr-2" data-toggle="modal"
-                                            data-target="#editModal"
-                                            onclick="fillModal('${ad.getId()}', '${ad.getTitle()}', '${ad.getDescription()}', '${adCategories.get(ad.getId())}', '${categoryNames}')">
-                                        Edit
-                                    </button>
-                                    <button type="button" class="btn btn-danger"><a
-                                            href="/ads/delete?id=${ad.getId()}"
-                                            class="anchorStyleRemove">Delete</a>
-                                    </button>
-                                </c:if>
-                            </div>
-                            <div class="card-body pb-0">
-                                <p class="card-title"><c:out value="${ad.description}"/></p>
-
-
-                                <div class="row justify-content-between">
-                                    <div>
-                                        <span class="pr-2" style="font-size: 12px;">Categories:</span>
-                                        <c:forEach items="${adCategories.get(ad.getId())}" var="cats">
-                                            <c:forEach items="${cats}" var="cat">
-                                                <a class="pr-2" style="font-size: 12px;" href="/view?category=${cat}"><c:out value="${cat}"/></a>
-                                            </c:forEach>
-                                        </c:forEach>
-                                    </div>
-
-                                    <p class="text-right mb-1 mr-1" style="font-size: small;"><c:out
-                                        value="Posted on: ${ad.timestamp}"/></p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </c:forEach>
-            </div>
+            <%@ include file="partials/adCards.jsp" %>
         </c:otherwise>
     </c:choose>
     <input type="hidden" name="id" id="id" form="editAd">

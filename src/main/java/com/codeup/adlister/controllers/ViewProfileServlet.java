@@ -25,7 +25,7 @@ public class ViewProfileServlet extends HttpServlet {
             response.sendRedirect("/login");
             return;
         }
-
+      
         List<Ad> ads = DaoFactory.getAdsDao().getAdsByUser(user);
         HashMap<Long, List<String>> data = new HashMap<>();
 
@@ -41,7 +41,7 @@ public class ViewProfileServlet extends HttpServlet {
             request.getSession().setAttribute("categoryNames", list);
         }
 
-        request.setAttribute("usersAds", ads);
+        request.setAttribute("ads", ads);
         request.setAttribute("adCategories", data);
         request.getRequestDispatcher("/WEB-INF/profile.jsp").forward(request, response);
     }

@@ -13,14 +13,14 @@
     <h1>Here Are all the ads!</h1>
 
     <%-- TODO display categories and sort ads into category sections --%>
-
-    <c:forEach var="ad" items="${ads}">
-        <div class="col-md-6">
-        <%-- TODO make ads clickable to go to its own page -> show.jsp?id= --%>
-            <a href="show?id=${ad.getId()}"><h2><c:out value="${ad.title}" /></h2></a>
-            <p><c:out value="${ad.description}" /></p>
-        </div>
-    </c:forEach>
+    <jsp:include page="../partials/adCards.jsp" />
+<%--    <c:forEach var="ad" items="${ads}">--%>
+<%--        <div class="col-md-6">--%>
+<%--        &lt;%&ndash; TODO make ads clickable to go to its own page -> show.jsp?id= &ndash;%&gt;--%>
+<%--            <a href="show?id=${ad.getId()}"><h2><c:out value="${ad.title}" /></h2></a>--%>
+<%--            <p><c:out value="${ad.description}" /></p>--%>
+<%--        </div>--%>
+<%--    </c:forEach>--%>
 </div>
 
 <jsp:include page="../partials/JQuery.jsp" />
