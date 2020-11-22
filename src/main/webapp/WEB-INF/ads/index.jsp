@@ -13,7 +13,7 @@
     <h1>Here Are all the ads!</h1>
 
     <%-- TODO display categories and sort ads into category sections --%>
-    <%@ include file="../partials/adCards.jsp" %>
+    <jsp:include page="../partials/adCards.jsp" />
 <%--    <c:forEach var="ad" items="${ads}">--%>
 <%--        <div class="col-md-6">--%>
 <%--        &lt;%&ndash; TODO make ads clickable to go to its own page -> show.jsp?id= &ndash;%&gt;--%>

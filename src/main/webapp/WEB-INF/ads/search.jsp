@@ -18,13 +18,7 @@
 
 <div class="container">
     <h1>Searched Ads</h1>
-
-    <c:forEach var="ad" items="${selectAds}">
-        <div class="col-md-6">
-            <a href="show?id=${ad.getId()}"><h2><c:out value="${ad.title}" /></h2></a>
-            <p><c:out value="${ad.description}" /></p>
-        </div>
-    </c:forEach>
+<%@ include file="../partials/adCards.jsp" %>
 </div>
 
 </body>
