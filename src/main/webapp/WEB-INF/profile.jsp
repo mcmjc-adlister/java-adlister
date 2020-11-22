@@ -10,7 +10,6 @@
 </head>
 <body class="bgColor">
 <jsp:include page="/WEB-INF/partials/navbar.jsp"/>
-
 <div class="container-fluid">
 
     <h1>Welcome, ${sessionScope.user.username}!<a href="${pageContext.request.contextPath}/update"
@@ -46,16 +45,8 @@
                         <label>Categories:
                             <select class="selectpicker" data-width="fit" data-max-options="3" name="newCategories"
                                     id="newCategories" multiple>
-                                <c:forEach items="${categories}" var="category">
-                                    <c:choose>
-                                        <c:when test="${adCategories.contains(category.getCategory())}">
-                                            <option value="${category.getCategory()}"
-                                                    selected>${category.getCategory()}</option>
-                                        </c:when>
-                                        <c:otherwise>
-                                            <option value="${category.getCategory()}">${category.getCategory()}</option>
-                                        </c:otherwise>
-                                    </c:choose>
+                                <c:forEach items="${categoryNames}" var="name">
+                                    <option value="${name}" id="${name}">${name}</option>
                                 </c:forEach>
                             </select>
                         </label>
@@ -74,10 +65,26 @@
     </div>
 </div>
 <script>
-    function fillModal(id, title, description) {
+    function fillModal(id, title, description, adCats, catNames) {
         document.getElementById('id').value = id;
         document.getElementById('title').value = title;
         document.getElementById('description').value = description;
+
+        let str = adCats.replace("[", "").replace("]", "");
+        let cats = catNames.replace("[", "").replace("]", "");
+
+        for (let cat of cats.split(",")) {
+            let option = document.getElementById(cat.trim());
+
+            for (let s of str.split(",")) {
+                console.log("s = " + s.trim());
+                if (cat.trim() === s.trim()) {
+                    option.selected = true;
+                }
+            }
+        }
+
+        $('.selectpicker').selectpicker('refresh');
     }
 
     function submitTest() {
