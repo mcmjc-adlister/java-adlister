@@ -3,17 +3,13 @@
 <html>
 <head>
     <jsp:include page="partials/head.jsp">
-        <jsp:param name="title" value="Filter Results" />
+        <jsp:param name="title" value="Filter Results"/>
     </jsp:include>
 </head>
 <body class="bgColor">
-<jsp:include page="partials/navbar.jsp" />
-<h3><c:out value="${cat}" /></h3>
-
-<c:forEach items="${ads}" var="ad">
-    <a href="/show?id=${ad.getId()}"><c:out value="${ad.getTitle()}" /></a>
-</c:forEach>
-
+    <jsp:include page="partials/navbar.jsp"/>
+    <h3><c:out value="${cat}"/></h3>
+    <%@ include file="partials/adCards.jsp" %>
 </body>
 <jsp:include page="/WEB-INF/partials/footer.jsp"></jsp:include>
 </html>
