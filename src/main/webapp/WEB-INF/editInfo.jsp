@@ -44,9 +44,11 @@
     </form>
 
 <%-- TODO (suggestion/optional) make delete user an admin only option --%>
+<c:if test="${sessionScope.user == admin}">
     <form action="/delete" method="post">
         <button type="submit" class="btn btn-danger">Delete User</button>
     </form>
+</c:if>
 </div>
 </body>
 <jsp:include page="/WEB-INF/partials/footer.jsp"></jsp:include>
