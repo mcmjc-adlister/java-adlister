@@ -37,6 +37,8 @@ public class AdShowServlet extends HttpServlet {
 
         request.setAttribute("ad", ad);
         request.setAttribute("poster", user);
+
+
         request.setAttribute("adCategories", DaoFactory.getCategoriesDao().getCategoriesByAdId(ad.getId()));
         request.setAttribute("categories", DaoFactory.getCategoriesDao().all());
 

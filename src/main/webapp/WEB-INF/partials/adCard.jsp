@@ -20,7 +20,6 @@
                         value="posted by ${poster.getUsername()} at ${ad.getTimestamp().toString()} UTC"/></p>
             </li>
         </ul>
-
     </div>
 </div>
 

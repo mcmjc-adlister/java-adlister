@@ -10,7 +10,6 @@
                     </a>
                     <c:if test="${user.getId() == ad.getUserId()}">
                         <%@ include file="cardButtons.jsp" %>
-                        <%@ include file="editModal.jsp"%>
                     </c:if>
                 </div>
                 <div class="card-body pb-0">
@@ -21,4 +20,5 @@
             </div>
         </div>
     </c:forEach>
+<%--    <%@ include file="editModal.jsp"%>--%>
 </div>

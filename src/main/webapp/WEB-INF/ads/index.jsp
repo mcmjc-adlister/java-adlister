@@ -11,19 +11,9 @@
 
 <div class="container">
     <h1 class="titleFont my-4 text-center">Current Rads:</h1>
-
-    <%-- TODO display categories and sort ads into category sections --%>
     <jsp:include page="../partials/adCards.jsp" />
-<%--    <c:forEach var="ad" items="${ads}">--%>
-<%--        <div class="col-md-6">--%>
-<%--        &lt;%&ndash; TODO make ads clickable to go to its own page -> show.jsp?id= &ndash;%&gt;--%>
-<%--            <a href="show?id=${ad.getId()}"><h2><c:out value="${ad.title}" /></h2></a>--%>
-<%--            <p><c:out value="${ad.description}" /></p>--%>
-<%--        </div>--%>
-<%--    </c:forEach>--%>
 </div>
-
-<jsp:include page="../partials/JQuery.jsp" />
 </body>
-<jsp:include page="/WEB-INF/partials/footer.jsp"></jsp:include>
+<jsp:include page="/WEB-INF/partials/footer.jsp" />
+
 </html>

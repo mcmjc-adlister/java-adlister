@@ -17,7 +17,7 @@
 <jsp:include page="/WEB-INF/partials/navbar.jsp" />
 
 <div class="container">
-    <h1>Searched Ads</h1>
+    <h1 class="text-center my-4 titleFont">Searched Ads</h1>
 <%@ include file="../partials/adCards.jsp" %>
 </div>
 
