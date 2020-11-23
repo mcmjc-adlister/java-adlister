@@ -7,5 +7,9 @@
 <!-- Bootstrap CSS -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
+<!--Fonts-->
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Cambo&family=Roboto+Condensed&family=Rock+Salt&display=swap" rel="stylesheet">
+
 <!-- CSS -->
 <style><%@ include file="/WEB-INF/partials/Stylin.css"%></style>

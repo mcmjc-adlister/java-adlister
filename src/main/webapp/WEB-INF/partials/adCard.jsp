@@ -9,7 +9,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
         <div class="card mt-5">
             <div class="d-flex card-header">
-                <h2 class="mr-auto"><c:out value="${ad.getTitle()}"/></h2>
+                <h2 class="mr-auto logoFont"><c:out value="${ad.getTitle()}"/></h2>
                 <c:if test="${user.getId() == ad.getUserId()}">
                     <%@ include file="cardButtons.jsp" %>
                 </c:if>

@@ -10,7 +10,7 @@
 <jsp:include page="/WEB-INF/partials/navbar.jsp" />
 
 <div class="container">
-    <h1>Here Are all the ads!</h1>
+    <h1 class="titleFont my-4 text-center">Current Rads:</h1>
 
     <%-- TODO display categories and sort ads into category sections --%>
     <jsp:include page="../partials/adCards.jsp" />

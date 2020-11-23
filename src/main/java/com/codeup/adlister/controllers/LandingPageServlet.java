@@ -12,10 +12,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+@WebServlet(name = "LandingPageServlet", urlPatterns = "")
 public class LandingPageServlet extends HttpServlet {
-    @WebServlet(name = "controllers.LandingPageServlet", urlPatterns = "")
-    public class AdsIndexServlet extends HttpServlet {
-        protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
             List<Ad> allAds = DaoFactory.getAdsDao().all();
             List<Ad> randomAds = new ArrayList<>();
 
@@ -30,6 +29,5 @@ public class LandingPageServlet extends HttpServlet {
 
             request.setAttribute("ads", randomAds);
             request.getRequestDispatcher("/index.jsp").forward(request, response);
-        }
     }
 }
