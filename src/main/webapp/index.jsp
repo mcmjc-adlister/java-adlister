@@ -14,4 +14,5 @@
         <jsp:include page="WEB-INF/partials/adCards.jsp" />
     </div>
 </body>
+<jsp:include page="WEB-INF/partials/footer.jsp" />
 </html>

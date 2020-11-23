@@ -6,14 +6,6 @@
     <jsp:include page="/WEB-INF/partials/head.jsp">
         <jsp:param name="title" value="Edit Profile Information"/>
     </jsp:include>
-<%--    <style>--%>
-<%--        /* Image Designing Propoerties */--%>
-<%--        .thumb {--%>
-<%--            height: 75px;--%>
-<%--            border: 1px solid #000;--%>
-<%--            margin: 10px 5px 0 0;--%>
-<%--        }--%>
-<%--    </style>--%>
 </head>
 <body class="bgColor">
 

@@ -33,14 +33,6 @@ public class ViewProfileServlet extends HttpServlet {
             data.put(ad.getId(), DaoFactory.getCategoriesDao().getCategoriesByAdId(ad.getId()));
         }
 
-        if (request.getAttribute("categoryNames") == null) {
-            List<String> list = new ArrayList<>();
-            for (Category cat: DaoFactory.getCategoriesDao().all()) {
-                    list.add(cat.getCategory());
-            }
-            request.getSession().setAttribute("categoryNames", list);
-        }
-
         request.setAttribute("ads", ads);
         request.setAttribute("adCategories", data);
         request.getRequestDispatcher("/WEB-INF/profile.jsp").forward(request, response);

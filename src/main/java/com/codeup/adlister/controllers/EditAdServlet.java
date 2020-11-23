@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.List;
 
 @WebServlet(name = "EditAdServlet", urlPatterns="/ads/edit")
 public class EditAdServlet extends HttpServlet {
@@ -48,7 +49,18 @@ public class EditAdServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+//        long id = Long.parseLong(request.getParameter("id"));
+//        Ad ad = DaoFactory.getAdsDao().getAdByID(id);
+//
+//        List<String> adCategories = DaoFactory.getCategoriesDao().getCategoriesByAdId(id);
+//
+//        request.setAttribute("title", ad.getTitle());
+//        request.setAttribute("description", ad.getDescription());
+//        request.setAttribute("adCategories", adCategories);
+//
+//        System.out.println("ad.getTitle() = " + ad.getTitle());
+//        System.out.println("ad.getDescription() = " + ad.getDescription());
+//        System.out.println("adCategories = " + adCategories.toString());
     }
 
 }
