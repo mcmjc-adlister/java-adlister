@@ -9,7 +9,9 @@
 <body class="bgColor">
     <jsp:include page="/WEB-INF/partials/navbar.jsp" />
     <div class="container">
-        <h1>Welcome to the Adlister!</h1>
+        <h1>Welcome to RadLister!</h1>
+        <h2>Here are some current Rads:</h2>
+        <jsp:include page="WEB-INF/partials/adCards.jsp" />
     </div>
 </body>
 </html>
