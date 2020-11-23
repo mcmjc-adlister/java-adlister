@@ -12,7 +12,7 @@
         <div class="col-auto mb-5">
             <div class="card h-100" style="width: 30rem;">
                 <div class="d-flex card-header">
-                    <a href="/show?id=${ad.getId()}" class="mr-auto"><h4><c:out
+                    <a href="/show?id=${ad.getId()}" class="mr-auto logoFont"><h4><c:out
                             value="${ad.title}"/></h4>
                     </a>
                     <c:if test="${user.getId() == ad.getUserId()}">

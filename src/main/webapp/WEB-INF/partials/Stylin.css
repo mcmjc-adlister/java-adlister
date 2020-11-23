@@ -25,3 +25,17 @@
 .cardColor{
     background-color: #c04df9;
 }
+
+.titleFont {
+    font-family: 'Rock Salt', cursive;
+    color: #cb84ff;
+}
+
+.subtitleFont {
+    font-family: 'Cambo', serif;
+    color: white;
+}
+
+.logoFont {
+    font-family: 'Roboto Condensed', sans-serif;
+}
