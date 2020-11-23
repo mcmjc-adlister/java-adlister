@@ -8,7 +8,7 @@
 </head>
 <body class="bgColor">
     <jsp:include page="partials/navbar.jsp"/>
-    <h3><c:out value="${cat}"/></h3>
+    <h3 class="text-center"><c:out value="${cat}"/></h3>
     <%@ include file="partials/adCards.jsp" %>
 </body>
 <jsp:include page="/WEB-INF/partials/footer.jsp"></jsp:include>

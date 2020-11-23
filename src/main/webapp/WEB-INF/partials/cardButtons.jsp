@@ -7,8 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <button type="button" class="btn btn-primary mr-2" data-toggle="modal"
-        data-target="#editModal"
-        onclick='fillModal("${ad.getId()}", "${ad.getTitle()}", "${ad.getDescription()}")'>
+        data-target="#editModal">
     Edit
 </button>
 <button type="button" class="btn btn-danger"><a
