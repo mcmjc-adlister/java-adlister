@@ -20,5 +20,5 @@
             </div>
         </div>
     </c:forEach>
-<%--    <%@ include file="editModal.jsp"%>--%>
+    <%@ include file="editModal.jsp"%>
 </div>

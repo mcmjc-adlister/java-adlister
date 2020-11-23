@@ -14,7 +14,7 @@
             <div class="modal-body">
                 <span id="errorMsg"></span>
                 <form method="POST" action="/ads/edit" id="editAd">
-                    <input type="hidden" name="id" id="id" value="${ad.id}">
+                    <input type="hidden" name="id" id="modalId" value="${ad.id}">
                     <label>
                         Title<br>
                         <input type="text" id="modalTitle" name="title">
@@ -23,14 +23,7 @@
                         <select class="selectpicker" data-width="fit" data-max-options="3" name="newCategories"
                                 id="newCategories" multiple>
                             <c:forEach items="${categoryNames}" var="category">
-                                <c:choose>
-                                    <c:when test="${adCategories.contains(category)}">
-                                        <option value="${category}" selected>${category}</option>
-                                    </c:when>
-                                    <c:otherwise>
-                                        <option value="${category}">${category}</option>
-                                    </c:otherwise>
-                                </c:choose>
+                                <option value="${category}">${category}</option>
                             </c:forEach>
                         </select>
                     </label>

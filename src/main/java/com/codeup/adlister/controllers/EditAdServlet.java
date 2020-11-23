@@ -20,18 +20,11 @@ public class EditAdServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        System.out.println(request.getParameter("id"));
-
         HttpSession session = request.getSession();
         Long id = Long.parseLong(request.getParameter("id"));
         String title = request.getParameter("title");
         String description = request.getParameter("description");
 
-        System.out.println("id = " + id);
-        System.out.println("title = " + title);
-        System.out.println("description = " + description);
-        System.out.println("request.getParameterValues(\"newCategories\") = " + Arrays.toString(request.getParameterValues("newCategories")));
-        
         Ads ads = DaoFactory.getAdsDao();
         Ad ad = ads.getAdByID(id);
         User user = (User) session.getAttribute("user");
