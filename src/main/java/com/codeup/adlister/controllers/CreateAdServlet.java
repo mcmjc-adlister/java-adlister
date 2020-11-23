@@ -70,7 +70,7 @@ public class CreateAdServlet extends HttpServlet {
             Ad ad = new Ad(
                     user.getId(),
                     title,
-                    description,
+                    description.replaceAll("(?:\n|\r|\\n|\\r)", " ").replaceAll("\\s{2,}", " ").trim(),
                     new Timestamp(new Date().getTime())
             );
 
